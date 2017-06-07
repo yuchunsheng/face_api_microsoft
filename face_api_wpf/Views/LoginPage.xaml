@@ -9,6 +9,6 @@
       Title="LoginPage">
 
     <Grid Background="Green">
-        
+        <Button Content="next page" Click="Button_click" />
     </Grid>
 </Page>

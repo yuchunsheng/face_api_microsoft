@@ -20,9 +20,17 @@ namespace face_api_wpf.Views
     /// </summary>
     public partial class FaceRepositoryPage : Page
     {
-        public FaceRepositoryPage()
+        private int test;
+
+        //public FaceRepositoryPage()
+        //{
+        //    InitializeComponent();
+        //}
+
+        public FaceRepositoryPage(int test)
         {
             InitializeComponent();
+            this.test = test;
         }
     }
 }

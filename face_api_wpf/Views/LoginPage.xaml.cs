@@ -24,5 +24,10 @@ namespace face_api_wpf.Views
         {
             InitializeComponent();
         }
+
+        private void Button_click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new FaceRepositoryPage(10));
+        }
     }
 }
