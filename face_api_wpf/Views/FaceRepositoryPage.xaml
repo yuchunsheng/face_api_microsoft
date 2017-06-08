@@ -9,6 +9,10 @@
       Title="FaceRepositoryPage">
 
     <Grid Background="Blue">
+        <StackPanel Orientation="Vertical">
+            <TextBox />
+            <Button Content="command" Command="{Binding command}"></Button>
+        </StackPanel>
         
     </Grid>
 </Page>

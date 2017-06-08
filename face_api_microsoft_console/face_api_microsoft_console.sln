@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.ProjectOxford.Com
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "face_api_wpf", "..\face_api_wpf\face_api_wpf.csproj", "{C0C67E13-556A-4E0D-B5AD-A57A346947E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "face_api_models", "face_api_models\face_api_models.csproj", "{F71A9D40-42BE-4347-8C7F-E8AB53FE3A46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C0C67E13-556A-4E0D-B5AD-A57A346947E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0C67E13-556A-4E0D-B5AD-A57A346947E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0C67E13-556A-4E0D-B5AD-A57A346947E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F71A9D40-42BE-4347-8C7F-E8AB53FE3A46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F71A9D40-42BE-4347-8C7F-E8AB53FE3A46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F71A9D40-42BE-4347-8C7F-E8AB53FE3A46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F71A9D40-42BE-4347-8C7F-E8AB53FE3A46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using face_api_wpf.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,15 +23,24 @@ namespace face_api_wpf.Views
     {
         private int test;
 
-        //public FaceRepositoryPage()
-        //{
-        //    InitializeComponent();
-        //}
+        FaceRepositoryViewModel face_repository = new FaceRepositoryViewModel();
 
-        public FaceRepositoryPage(int test)
+
+
+        public FaceRepositoryPage()
         {
             InitializeComponent();
+            DataContext = face_repository;
+        }
+
+        public FaceRepositoryPage(int test):this()
+        {
             this.test = test;
+        }
+
+        private void onButton_click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

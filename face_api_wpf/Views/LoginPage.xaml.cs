@@ -1,4 +1,5 @@
-﻿using System;
+﻿using face_api_wpf.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace face_api_wpf.Views
     /// </summary>
     public partial class LoginPage : Page
     {
+        private LoginViewModel login_view_model = new LoginViewModel(); 
         public LoginPage()
         {
             InitializeComponent();
+            DataContext = login_view_model;
+
         }
 
         private void Button_click(object sender, RoutedEventArgs e)

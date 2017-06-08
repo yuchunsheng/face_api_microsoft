@@ -4,11 +4,30 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:face_api_wpf.Views"
+      xmlns:viewModel="clr-namespace:face_api_wpf.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="LoginPage">
-
+    
     <Grid Background="Green">
-        <Button Content="next page" Click="Button_click" />
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue"> 
+            <Grid.ColumnDefinitions> 
+                <ColumnDefinition/> 
+                <ColumnDefinition/> 
+            </Grid.ColumnDefinitions> 
+            <Grid.RowDefinitions> 
+                <RowDefinition/> 
+                <RowDefinition/> 
+                <RowDefinition/> 
+                <RowDefinition/> 
+            </Grid.RowDefinitions> 
+            <TextBlock Text="Log in" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" FontSize="20"/> 
+            <TextBlock Text="Name" Grid.Row="1" Margin="3"/>
+            <TextBox x:Name="txtName" Text="{Binding Path=UserName}" Grid.Row="1" Grid.Column="1" Margin="3" MinWidth="100" HorizontalAlignment="Left"/> 
+            <TextBlock Text="Password" Grid.Row="2" Margin="3"/> 
+            <TextBox x:Name="txtPassword" Text="password" Grid.Column="1" Grid.Row="2" Margin="3" MinWidth="100" HorizontalAlignment="Left"/>
+        <Button Content="Log in" Click="Button_click" Grid.Row="3" Grid.Column="1" Margin="3"/> 
+        </Grid> 
+        
     </Grid>
 </Page>
