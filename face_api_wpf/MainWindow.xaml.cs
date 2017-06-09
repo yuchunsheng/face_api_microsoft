@@ -24,7 +24,7 @@ namespace face_api_wpf
             var appSettings = ConfigurationManager.AppSettings;
             string result = appSettings["test"] ?? "Not Found";
             Title = String.Format("App Setting {0}", result);
-            _scenarioFrame.NavigationService.Navigate(new LoginPage());
+            main_frame.NavigationService.Navigate(new LoginPage());
         }
 
         private readonly IFaceServiceClient faceServiceClient = new FaceServiceClient("36d7fbe10dfc46e7887edde19be2214b",
