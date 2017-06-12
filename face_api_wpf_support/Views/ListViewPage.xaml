@@ -25,10 +25,10 @@
             
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Grid.Column="0" Background="#00b294">
-            <Button Content="Add" />
+            <Button Content="Add New" Click="add_button_click" />
         </DockPanel>
 
-        <ListView Grid.Row="1" Grid.Column="0" Margin="10" ItemsSource="{Binding business_client_list}" HorizontalAlignment="Left" HorizontalContentAlignment="Left">
+        <ListView x:Name="test_list"  Grid.Row="1" Grid.Column="0" Margin="10" ItemsSource="{Binding business_client_list}" HorizontalAlignment="Left" HorizontalContentAlignment="Left">
             <ListView.View>
                 <GridView>
                     <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Name" Width="320" DisplayMemberBinding="{Binding Name}" />

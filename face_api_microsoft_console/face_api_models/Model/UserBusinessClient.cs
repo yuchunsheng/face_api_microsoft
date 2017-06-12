@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace face_api_models.Model
+namespace face_api_commons.Model
 {
     public partial class UserBusinessClient
     {

@@ -176,6 +176,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ObservableCollectionObject.cs" />
+    <Compile Include="Common\ObservableObject.cs" />
     <Compile Include="Model\BusinessClient.cs" />
     <Compile Include="Model\DemoContext.cs" />
     <Compile Include="Model\FacePhotoPath.cs" />

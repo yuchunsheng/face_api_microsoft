@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.ProjectOxford.Com
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "face_api_wpf", "..\face_api_wpf\face_api_wpf.csproj", "{C0C67E13-556A-4E0D-B5AD-A57A346947E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "face_api_models", "face_api_models\face_api_models.csproj", "{F71A9D40-42BE-4347-8C7F-E8AB53FE3A46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "face_api_commons", "face_api_models\face_api_commons.csproj", "{F71A9D40-42BE-4347-8C7F-E8AB53FE3A46}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "face_api_wpf_support", "..\face_api_wpf_support\face_api_wpf_support.csproj", "{8EEDB3B2-1570-41CB-99DC-B9EEBCBEB202}"
 EndProject

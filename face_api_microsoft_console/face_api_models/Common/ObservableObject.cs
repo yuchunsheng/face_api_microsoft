@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 
 
-namespace face_api_wpf.ViewModels
+namespace face_api_commons.Common
 {
     public class ObservableObject : INotifyPropertyChanged
     {

@@ -194,7 +194,6 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\Commands\DelegateCommand.cs" />
     <Compile Include="ViewModels\FaceRepositoryViewModel.cs" />
-    <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Views\FaceRepositoryPage.xaml.cs">
       <DependentUpon>FaceRepositoryPage.xaml</DependentUpon>
@@ -262,9 +261,9 @@
       <Project>{e858ebf6-cdd6-4f41-9e9d-0644dfa229e5}</Project>
       <Name>Microsoft.ProjectOxford.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\face_api_microsoft_console\face_api_models\face_api_models.csproj">
+    <ProjectReference Include="..\face_api_microsoft_console\face_api_models\face_api_commons.csproj">
       <Project>{f71a9d40-42be-4347-8c7f-e8ab53fe3a46}</Project>
-      <Name>face_api_models</Name>
+      <Name>face_api_commons</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

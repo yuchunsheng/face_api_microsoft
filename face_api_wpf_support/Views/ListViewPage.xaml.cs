@@ -1,5 +1,9 @@
 ﻿using face_api_wpf_support.ViewModels;
+using System;
+using System.ComponentModel;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Navigation;
 
 namespace face_api_wpf_support.Views
 {
@@ -14,6 +18,28 @@ namespace face_api_wpf_support.Views
         {
             InitializeComponent();
             DataContext = list_view_model;
+        }
+
+        private void add_button_click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            PageFunction<Object> add_item_page = new AddItemPageFunction();
+            add_item_page.Return += new ReturnEventHandler<Object>(page_function_return);
+
+            this.NavigationService.Navigate(add_item_page);
+
+        }
+
+        private void page_function_return(object sender, ReturnEventArgs<Object> e)
+        {
+            Item addedItem = (Item)e.Result;
+            this.list_view_model.add_item(addedItem);
+
+            ICollectionView view = CollectionViewSource.GetDefaultView(list_view_model.business_client_list);
+            view.Refresh();
+
+
+
+
         }
     }
 }

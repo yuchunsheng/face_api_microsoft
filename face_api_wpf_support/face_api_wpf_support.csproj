@@ -115,7 +115,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\AddItemViewModel.cs" />
+    <Compile Include="ViewModels\Item.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
+    <Compile Include="Views\AddItemPageFunction.xaml.cs">
+      <DependentUpon>AddItemPageFunction.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ListViewPage.xaml.cs">
       <DependentUpon>ListViewPage.xaml</DependentUpon>
     </Compile>
@@ -131,6 +136,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AddItemPageFunction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ListViewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -173,9 +182,9 @@
       <Project>{e858ebf6-cdd6-4f41-9e9d-0644dfa229e5}</Project>
       <Name>Microsoft.ProjectOxford.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\face_api_microsoft_console\face_api_models\face_api_models.csproj">
+    <ProjectReference Include="..\face_api_microsoft_console\face_api_models\face_api_commons.csproj">
       <Project>{f71a9d40-42be-4347-8c7f-e8ab53fe3a46}</Project>
-      <Name>face_api_models</Name>
+      <Name>face_api_commons</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

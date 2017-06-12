@@ -1,8 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace face_api_models.Model
+namespace face_api_commons.Model
 {
     public partial class DemoContext : DbContext
     {
