@@ -41,5 +41,11 @@ namespace face_api_wpf_support.Views
 
 
         }
+
+        private void start_parrallel_task(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Page parralleTaskPage = new ParrallelTasksView();
+            this.NavigationService.Navigate(parralleTaskPage);
+        }
     }
 }

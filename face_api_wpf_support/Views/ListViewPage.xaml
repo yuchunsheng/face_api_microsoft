@@ -24,9 +24,10 @@
             <RowDefinition Height="Auto"/>
             
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" Grid.Column="0" Background="#00b294">
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
             <Button Content="Add New" Click="add_button_click" />
-        </DockPanel>
+            <Button Content="Parrallel tasks" Click="start_parrallel_task" />
+        </StackPanel>
 
         <ListView x:Name="test_list"  Grid.Row="1" Grid.Column="0" Margin="10" ItemsSource="{Binding business_client_list}" HorizontalAlignment="Left" HorizontalContentAlignment="Left">
             <ListView.View>
