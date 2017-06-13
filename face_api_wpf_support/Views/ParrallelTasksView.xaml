@@ -24,16 +24,68 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
 
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
             <Button Content="Go Home" Click="go_home" />
+            <materialDesign:PackIcon Kind="ThumbUp" VerticalAlignment="Center" Height="24" Width="24" />
             
         </StackPanel>
 
-        <materialDesign:Card Grid.Row="1" Grid.Column="0" Padding="32" Margin="16">
-            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}">My First Material Design App</TextBlock>
-        </materialDesign:Card>
+        <ScrollViewer Grid.Row="1"  Grid.Column="0" Height="300" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
+            
+                <ItemsControl ItemsSource="{Binding business_client_list}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <materialDesign:Card Padding="32" Margin="16">
+                                <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" Text="{Binding Name}"></TextBlock>
+                            </materialDesign:Card>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            
+        </ScrollViewer>
+        <Grid Grid.Row="2" Margin="10">
+            <DataGrid Name="dgUsers" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Birthday" Binding="{Binding Birthday}" />
+                </DataGrid.Columns>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <DockPanel Background="GhostWhite">
+                            <Image DockPanel.Dock="Left" Source="{Binding ImageUrl}" Height="64" Margin="10" />
+                            <Grid Margin="0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="ID: " FontWeight="Bold" />
+                                <TextBlock Text="{Binding Id}" Grid.Column="1" />
+                                <TextBlock Text="Name: " FontWeight="Bold" Grid.Row="1" />
+                                <TextBlock Text="{Binding Name}" Grid.Column="1" Grid.Row="1" />
+                                <TextBlock Text="Birthday: " FontWeight="Bold" Grid.Row="2" />
+                                <TextBlock Text="{Binding Birthday, StringFormat=d}" Grid.Column="1" Grid.Row="2" />
+
+                            </Grid>
+                        </DockPanel>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
+        </Grid>
+
+
+
+
+
+
 
     </Grid>
 </Page>
