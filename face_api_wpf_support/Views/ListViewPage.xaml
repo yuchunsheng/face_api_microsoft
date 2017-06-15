@@ -36,6 +36,7 @@
             <Button Content="Add New" Click="add_button_click" />
             <Button Content="Material Design Demo" Click="start_material_design_demo" />
             <Button Content="Task Parallel Library Demo" Click="start_task_parallel_library_demo"  />
+            <Button Content="Async Employee loading Demo" Click="async_load_employee_demo"   />
         </StackPanel>
         <materialDesign:Card Grid.Row="1" Grid.Column="0" Padding="32" Margin="16">
             <ListView x:Name="test_list"  Grid.Row="1" Grid.Column="0" Margin="10" ItemsSource="{Binding business_client_list}" HorizontalAlignment="Left" HorizontalContentAlignment="Left">

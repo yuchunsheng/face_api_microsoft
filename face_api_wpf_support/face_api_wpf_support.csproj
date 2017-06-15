@@ -124,6 +124,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModels\AddItemViewModel.cs" />
+    <Compile Include="ViewModels\Employee.cs" />
     <Compile Include="ViewModels\Item.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="Views\AddItemPageFunction.xaml.cs">
@@ -137,6 +138,9 @@
     </Compile>
     <Compile Include="Views\TaskParallelLibraryView.xaml.cs">
       <DependentUpon>TaskParallelLibraryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WPFAsyncQueryView.xaml.cs">
+      <DependentUpon>WPFAsyncQueryView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -163,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TaskParallelLibraryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WPFAsyncQueryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,6 +222,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Company.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -40,7 +40,7 @@ namespace face_api_wpf_support.Views
 
             // The Progress<T> constructor captures our UI context,
             //  so the lambda will be run on the UI thread.
-            var progress = new Progress<int>(ReportProgress);
+            var progress = new Progress<string>(ReportProgress);
 
             this.progress_bar.Visibility = Visibility.Visible;
 
@@ -57,14 +57,14 @@ namespace face_api_wpf_support.Views
 
         }
 
-        void ReportProgress(int value)
+        void ReportProgress(string value)
         {
             //Update the UI to reflect the progress value that is passed back.
             textBoxResults.Text = value + "%";
         }
 
 
-        async Task<int> UploadPicturesAsync(IProgress<int> progress)
+        async Task<int> UploadPicturesAsync(IProgress<string> progress)
         {
             int processCount = await Task.Run<int>(() =>
             {
@@ -72,7 +72,7 @@ namespace face_api_wpf_support.Views
                 {
                     Thread.Sleep(100); // CPU-bound work
                     if (progress != null)
-                        progress.Report(i);
+                        progress.Report(i.ToString());
                 }
                 return 100;
 

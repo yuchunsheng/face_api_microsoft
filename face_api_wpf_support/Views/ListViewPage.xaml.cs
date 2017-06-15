@@ -53,5 +53,11 @@ namespace face_api_wpf_support.Views
             Page task_parallel_library_page = new TaskParallelLibraryView();
             this.NavigationService.Navigate(task_parallel_library_page);
         }
+
+        private void async_load_employee_demo(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Page async_employee_load_page = new WPFAsyncQueryView();
+            this.NavigationService.Navigate(async_employee_load_page);
+        }
     }
 }
