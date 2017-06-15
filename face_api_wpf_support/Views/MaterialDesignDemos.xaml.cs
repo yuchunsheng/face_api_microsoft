@@ -19,12 +19,12 @@ namespace face_api_wpf_support.Views
     /// <summary>
     /// Interaction logic for ParrallelTasksView.xaml
     /// </summary>
-    public partial class ParrallelTasksView : Page
+    public partial class MaterialDesignDemos : Page
     {
         private ListViewModel list_view_model = new ListViewModel();
         private List<User> users = new List<User>();
 
-        public ParrallelTasksView()
+        public MaterialDesignDemos()
         {
             InitializeComponent();
             DataContext = list_view_model;

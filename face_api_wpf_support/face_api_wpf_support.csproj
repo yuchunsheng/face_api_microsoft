@@ -132,8 +132,11 @@
     <Compile Include="Views\ListViewPage.xaml.cs">
       <DependentUpon>ListViewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ParrallelTasksView.xaml.cs">
-      <DependentUpon>ParrallelTasksView.xaml</DependentUpon>
+    <Compile Include="Views\MaterialDesignDemos.xaml.cs">
+      <DependentUpon>MaterialDesignDemos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TaskParallelLibraryView.xaml.cs">
+      <DependentUpon>TaskParallelLibraryView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -155,7 +158,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ParrallelTasksView.xaml">
+    <Page Include="Views\MaterialDesignDemos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TaskParallelLibraryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

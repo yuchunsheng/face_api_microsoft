@@ -42,10 +42,16 @@ namespace face_api_wpf_support.Views
 
         }
 
-        private void start_parrallel_task(object sender, System.Windows.RoutedEventArgs e)
+        private void start_material_design_demo(object sender, System.Windows.RoutedEventArgs e)
         {
-            Page parralleTaskPage = new ParrallelTasksView();
-            this.NavigationService.Navigate(parralleTaskPage);
+            Page materialDesignDemoPage = new MaterialDesignDemos();
+            this.NavigationService.Navigate(materialDesignDemoPage);
+        }
+
+        private void start_task_parallel_library_demo(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Page task_parallel_library_page = new TaskParallelLibraryView();
+            this.NavigationService.Navigate(task_parallel_library_page);
         }
     }
 }
