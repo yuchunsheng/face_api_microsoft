@@ -130,11 +130,20 @@
     <Compile Include="Views\AddItemPageFunction.xaml.cs">
       <DependentUpon>AddItemPageFunction.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\BusinessClientPage.xaml.cs">
+      <DependentUpon>BusinessClientPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FactoryAsyncPage.xaml.cs">
+      <DependentUpon>FactoryAsyncPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ListViewPage.xaml.cs">
       <DependentUpon>ListViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MaterialDesignDemos.xaml.cs">
       <DependentUpon>MaterialDesignDemos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PageFunctionAddBussinessClient.xaml.cs">
+      <DependentUpon>PageFunctionAddBussinessClient.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TaskParallelLibraryView.xaml.cs">
       <DependentUpon>TaskParallelLibraryView.xaml</DependentUpon>
@@ -158,11 +167,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\BusinessClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FactoryAsyncPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ListViewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MaterialDesignDemos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PageFunctionAddBussinessClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

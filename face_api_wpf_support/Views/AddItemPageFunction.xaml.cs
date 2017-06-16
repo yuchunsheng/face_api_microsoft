@@ -18,6 +18,7 @@ namespace face_api_wpf_support.Views
         {
             Item new_item = new Item(text_box.Text);
 
+
             //Create instance of ReturnEventArgs to pass data back to caller page
             ReturnEventArgs<Object> return_object =
                new ReturnEventArgs<Object>((Object)new_item);

@@ -1,4 +1,4 @@
-﻿<Page x:Class="face_api_wpf_support.Views.ListViewPage"
+﻿<Page x:Class="face_api_wpf_support.Views.FactoryAsyncPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -13,14 +13,15 @@
       FontFamily="{DynamicResource MaterialDesignFont}"
       xmlns:local="clr-namespace:face_api_wpf_support.Views"
       mc:Ignorable="d" 
-      
-      Title="ListViewPage">
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="FactoryAsyncPage">
+
     <Page.Resources>
         <Style x:Key="ListViewStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="HorizontalContentAlignment" Value="Left" />
         </Style>
     </Page.Resources>
-    
+
 
     <Grid >
         <Grid.ColumnDefinitions>
@@ -30,17 +31,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="Auto"/>
-            
+
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
-            <Button Content="Add New" Click="add_button_click" />
-            <Button Content="Material Design Demo" Click="start_material_design_demo" />
-            <Button Content="Task Parallel Library Demo" Click="start_task_parallel_library_demo"  />
-            <Button Content="Async Employee loading Demo" Click="async_load_employee_demo"   />
-            <Button Content="Load Page Async" Click="async_load_page_demo"    />
-            <Button Content="Load Business client Page" Click="load_business_client_page"     />
+            <Button Content="Add New" />
+            
         </StackPanel>
-        
+
         <materialDesign:Card Grid.Row="1" Grid.Column="0" Padding="32" Margin="16">
             <ListView x:Name="test_list"  Grid.Row="1" Grid.Column="0" Margin="10" ItemsSource="{Binding business_client_list}" HorizontalAlignment="Left" HorizontalContentAlignment="Left">
                 <ListView.View>
@@ -54,10 +51,9 @@
 
                 </ListView.View>
             </ListView>
-        </materialDesign:Card>    
-        
+        </materialDesign:Card>
+
 
 
     </Grid>
-
 </Page>
