@@ -1,4 +1,5 @@
 ﻿using face_api_commons.Common;
+using face_api_commons.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,14 +37,43 @@ namespace face_api_wpf_support.ViewModels
 
         }
 
+        private String _client_name;
+        public String client_name
+        {
+            get { return _client_name; }
+            set
+            {
+                _client_name = value;
+                RaisePropertyChangedEvent("client_name");
+            }
+        }
+
         private void goto_next_page(object obj)
         {
+            string param = (String)obj;
+            Console.WriteLine(param);
+            Console.WriteLine(client_name);
+
+            if (client_name.Length > 0)
+            {
+                using (var context = new DemoContext())
+                {
+                    // Perform data access using the context 
+                    BusinessClient business_clinet = new BusinessClient();
+                    business_clinet.ClientName = client_name;
+
+                    context.BusinessClient.Add(business_clinet);
+                    context.SaveChanges();
+
+                }
+            }
+            
             this.next_page_checked = true;
         }
 
         public BusinessClientAddViewModel()
         {
-
+            client_name = "";
         }    
     }
 }

@@ -23,11 +23,11 @@
 
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Grid.Column="1" Background="#00b294">
-            <Button Content="Submit" Command="{Binding goto_next_page_command}" />
+            <Button Content="Submit" Command="{Binding goto_next_page_command}" CommandParameter="Test" />
         </DockPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Background="Cyan">
-            <TextBox x:Name="text_box"></TextBox>
+            <TextBox x:Name="client_name" Text="{Binding client_name}"></TextBox>
             <CheckBox IsChecked="{Binding next_page_checked}" Checked="next_page_checked" Visibility="Hidden" />
         </StackPanel>
     </Grid>
