@@ -21,11 +21,12 @@ namespace face_api_wpf_support.Views
     /// </summary>
     public partial class FactoryAsyncPage : Page
     {
-        private ListViewModel list_view_model = new ListViewModel();
+        private ListViewModel list_view_model;
 
         public FactoryAsyncPage()
         {
             InitializeComponent();
+            list_view_model = new ListViewModel();
             DataContext = list_view_model;
         }
 

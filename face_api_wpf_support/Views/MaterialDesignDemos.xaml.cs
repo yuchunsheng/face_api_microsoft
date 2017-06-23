@@ -21,12 +21,13 @@ namespace face_api_wpf_support.Views
     /// </summary>
     public partial class MaterialDesignDemos : Page
     {
-        private ListViewModel list_view_model = new ListViewModel();
+        private ListViewModel list_view_model;
         private List<User> users = new List<User>();
 
         public MaterialDesignDemos()
         {
             InitializeComponent();
+            list_view_model = new ListViewModel();
             DataContext = list_view_model;
             add_users();
             dgUsers.ItemsSource = users;

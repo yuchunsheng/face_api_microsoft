@@ -14,12 +14,12 @@ namespace face_api_wpf_support.Views
     /// </summary>
     public partial class ListViewPage : Page
     {
-        private ListViewModel list_view_model = new ListViewModel();
+        private ListViewModel list_view_model;
 
         public ListViewPage()
         {
             InitializeComponent();
-            
+            list_view_model = new ListViewModel();
             DataContext = list_view_model;
             
         }
@@ -74,9 +74,10 @@ namespace face_api_wpf_support.Views
             this.NavigationService.Navigate(factory_async_load_page);
         }
 
-        private async void load_business_client_page(object sender, RoutedEventArgs e)
+        private void load_business_client_page(object sender, RoutedEventArgs e)
         {
-            Page business_client_page = await BusinessClientPage.CreatePageAsync();
+            BusinessClientPage business_client_page = new BusinessClientPage();
+            business_client_page.init();
             this.NavigationService.Navigate(business_client_page);
 
         }

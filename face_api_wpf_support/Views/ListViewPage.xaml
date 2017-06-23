@@ -47,7 +47,7 @@
                     <GridView>
 
                         <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Name" Width="320" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Matches" Width="80" DisplayMemberBinding="{Binding Matches}" />
+                        <!--<GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Matches" Width="80" DisplayMemberBinding="{Binding Matches}" />-->
 
 
                     </GridView>

@@ -1,4 +1,4 @@
-﻿<Page x:Class="face_api_wpf_support.Views.BusinessClientPage"
+﻿<Page x:Name="myWindow" x:Class="face_api_wpf_support.Views.BusinessClientPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,6 +11,7 @@
       TextOptions.TextRenderingMode="Auto"        
       Background="{DynamicResource MaterialDesignPaper}"
       FontFamily="{DynamicResource MaterialDesignFont}"
+      xmlns:system="clr-namespace:System;assembly=mscorlib"
       xmlns:local="clr-namespace:face_api_wpf_support.Views"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
@@ -35,7 +36,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
             <Button Content="Go Home" Click="go_home" />
-            <Button Content="Add New" Click="add_business_client" />
+            <Button Content="Add new" Click="add_new_clicked"  />
 
         </StackPanel>
 
@@ -44,13 +45,21 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Name" Width="320" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn  HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Details" Width="320">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Details" Click="details_clicked" Tag="{Binding Id}"  />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        
                     </GridView>
 
                 </ListView.View>
             </ListView>
         </materialDesign:Card>
 
-
-
     </Grid>
+    
+    
 </Page>

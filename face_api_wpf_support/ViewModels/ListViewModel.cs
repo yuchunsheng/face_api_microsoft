@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 using face_api_commons.Model;
 using face_api_commons.Common;
+using System.Windows.Input;
+using System.Windows.Navigation;
+using face_api_wpf_support.Views;
+using System.Windows.Controls;
 
 namespace face_api_wpf_support.ViewModels
 {
@@ -14,11 +18,29 @@ namespace face_api_wpf_support.ViewModels
     public class ListViewModel
     {
         public List<Item> business_client_list { get; private set; }
-        
+
+        private ICommand hello_world;
+        public ICommand hellow_world_command
+        {
+            get
+            {
+                if (hello_world == null)
+                    hello_world = new HelloWorldCommand();
+                return hello_world;
+            }
+            set
+            {
+                hello_world = value;
+            }
+
+        }
+
+        RelayCommand Command;
 
         public ListViewModel()
         {
             business_client_list = new List<Item>();
+            hello_world = new HelloWorldCommand();
         }
 
         public async Task load_business_client()
@@ -28,14 +50,12 @@ namespace face_api_wpf_support.ViewModels
                 List<BusinessClient> business_clients_1 = await SomethingAsync();
                 foreach (var client in business_clients_1)
                 {
-                    business_client_list.Add(new Item(client.ClientName));
+                    business_client_list.Add(new Item(client.Id, client.ClientName));
                 }
             }
             catch (Exception e){
                 Console.WriteLine(e.ToString());
             }
-            
-
 
         }
 
@@ -128,7 +148,7 @@ namespace face_api_wpf_support.ViewModels
 
             get_business_client_task.Wait();
         }
-
+        
     }
 
    
