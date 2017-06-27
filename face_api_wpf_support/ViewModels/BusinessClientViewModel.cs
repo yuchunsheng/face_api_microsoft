@@ -1,12 +1,14 @@
 ﻿using face_api_commons.Common;
 using face_api_commons.Model;
 using face_api_wpf_support.Views;
+using face_api_wpf_support.Views.business_client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 
 namespace face_api_wpf_support.ViewModels
@@ -26,6 +28,31 @@ namespace face_api_wpf_support.ViewModels
 
         }
 
+        private PageFunction<string> _next_page;
+        public PageFunction<string> next_page
+        {
+            get
+            {
+                return _next_page;
+            }
+
+            set
+            {
+                _next_page = value;
+            }
+        }
+
+        private bool _add_page_checked;
+        public bool add_page_checked
+        {
+            get { return _add_page_checked; }
+            set
+            {
+                _add_page_checked = value;
+                RaisePropertyChangedEvent("add_page_checked");
+            }
+        }
+
         RelayCommand _add_new_command;
         public RelayCommand add_new_command
         {
@@ -41,11 +68,55 @@ namespace face_api_wpf_support.ViewModels
             }
 
         }
-
+        
         private void show_add_new(object obj)
         {
-            throw new NotImplementedException();
+            add_page_checked = true;
         }
+
+        private bool _details_page_checked;
+        public bool details_page_checked
+        {
+            get { return _details_page_checked; }
+            set
+            {
+                _details_page_checked = value;
+                RaisePropertyChangedEvent("details_page_checked");
+            }
+        }
+
+        RelayCommand _show_details_command;
+        public RelayCommand show_details_command
+        {
+            get
+            {
+                if (_show_details_command == null)
+                    _show_details_command = new RelayCommand(new Action<object>(show_details_page));
+                return _show_details_command;
+            }
+            set
+            {
+                _show_details_command = value;
+            }
+
+        }
+
+        
+
+        
+
+        
+        private void show_details_page(object obj)
+        {
+            int client_id = Convert.ToInt32(obj);
+            Console.WriteLine(client_id);
+            BusinessClientDetailsPageFunction details_page = new BusinessClientDetailsPageFunction();
+            details_page.details_model.load_item(client_id);
+
+            next_page = details_page;
+            details_page_checked = true;
+        }
+
 
         public BusinessClientViewModel()
         {

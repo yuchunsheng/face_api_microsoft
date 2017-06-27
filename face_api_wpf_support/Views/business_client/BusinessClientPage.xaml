@@ -36,19 +36,37 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
             <Button Content="Go Home" Click="go_home" />
-            <Button Content="Add new" Click="add_new_clicked"  />
+            <Button Content="Add new" Command="{Binding add_new_command}"  />
+            <CheckBox IsChecked="{Binding add_page_checked}" Checked="add_page_checked" Visibility="Hidden" />
+            <CheckBox IsChecked="{Binding details_page_checked}" Checked="details_page_checked" Visibility="Hidden" />
 
         </StackPanel>
 
-        <materialDesign:Card Grid.Row="1" Grid.Column="0" Margin="16">
-            <ListView x:Name="test_list"  Grid.Row="1" Grid.Column="0" Margin="10" ItemsSource="{Binding business_client_list}" HorizontalAlignment="Left" HorizontalContentAlignment="Left">
+        <!--<ScrollViewer Grid.Row="1"  Grid.Column="0" Height="300" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
+
+            <ItemsControl ItemsSource="{Binding business_client_list}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Card Padding="32" Margin="16">
+
+                            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" Text="{Binding Name}"></TextBlock>
+                        </materialDesign:Card>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </ScrollViewer>-->
+        
+        <materialDesign:Card Grid.Row="1" Grid.Column="0" Margin="16" Height="600">
+            <ListView x:Name="test_list"  Grid.Row="1" Grid.Column="0" Margin="10" ItemsSource="{Binding business_client_list}" ScrollViewer.CanContentScroll="True" 
+          ScrollViewer.VerticalScrollBarVisibility="Visible"  HorizontalAlignment="Left" HorizontalContentAlignment="Left">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Name" Width="320" DisplayMemberBinding="{Binding Name}" />
                         <GridViewColumn  HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Details" Width="320">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Details" Click="details_clicked" Tag="{Binding Id}"  />
+                                    <Button Content="Details" Command="{Binding DataContext.show_details_command, ElementName=myWindow}" CommandParameter="{Binding Id}"  />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -58,6 +76,7 @@
                 </ListView.View>
             </ListView>
         </materialDesign:Card>
+        
 
     </Grid>
     

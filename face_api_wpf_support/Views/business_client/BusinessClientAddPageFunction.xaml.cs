@@ -31,9 +31,17 @@ namespace face_api_wpf_support.Views
 
         private void next_page_checked(object sender, RoutedEventArgs e)
         {
-            BusinessClientPage business_client_page = new BusinessClientPage();
-            business_client_page.init();
-            this.NavigationService.Navigate(business_client_page);
+            //BusinessClientPage business_client_page = new BusinessClientPage();
+            //business_client_page.init();
+            //this.NavigationService.Navigate(business_client_page);
+            //Create instance of ReturnEventArgs to pass data back to caller page
+
+            
+            ReturnEventArgs<String> return_object =
+               new ReturnEventArgs<String>("success");
+
+            //Call to PageFunction's OnReturn method and pass selected List
+            OnReturn(return_object);
         }
     }
 }

@@ -53,19 +53,27 @@ namespace face_api_wpf_support.ViewModels
             string param = (String)obj;
             Console.WriteLine(param);
             Console.WriteLine(client_name);
-
+            
             if (client_name.Length > 0)
             {
-                using (var context = new DemoContext())
+                Task add_business_client_task = Task.Factory.StartNew(
+                () =>
                 {
-                    // Perform data access using the context 
-                    BusinessClient business_clinet = new BusinessClient();
-                    business_clinet.ClientName = client_name;
+                    using (var context = new DemoContext())
+                    {
+                        // Perform data access using the context 
+                        BusinessClient business_clinet = new BusinessClient();
+                        business_clinet.ClientName = client_name;
 
-                    context.BusinessClient.Add(business_clinet);
-                    context.SaveChanges();
+                        context.BusinessClient.Add(business_clinet);
+                        context.SaveChanges();
 
-                }
+                    }
+
+                });
+
+                add_business_client_task.Wait();
+
             }
             
             this.next_page_checked = true;

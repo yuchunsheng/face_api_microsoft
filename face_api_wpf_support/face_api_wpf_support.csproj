@@ -125,6 +125,7 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\AddItemViewModel.cs" />
     <Compile Include="ViewModels\BusinessClientAddViewModel.cs" />
+    <Compile Include="ViewModels\BusinessClientDetailsViewModel.cs" />
     <Compile Include="ViewModels\BusinessClientViewModel.cs" />
     <Compile Include="ViewModels\Employee.cs" />
     <Compile Include="ViewModels\Item.cs" />
@@ -133,10 +134,13 @@
     <Compile Include="Views\AddItemPageFunction.xaml.cs">
       <DependentUpon>AddItemPageFunction.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BusinessClientAddPageFunction.xaml.cs">
+    <Compile Include="Views\business_client\BusinessClientAddPageFunction.xaml.cs">
       <DependentUpon>BusinessClientAddPageFunction.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BusinessClientPage.xaml.cs">
+    <Compile Include="Views\business_client\BusinessClientDetailsPageFunction.xaml.cs">
+      <DependentUpon>BusinessClientDetailsPageFunction.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\business_client\BusinessClientPage.xaml.cs">
       <DependentUpon>BusinessClientPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FactoryAsyncPage.xaml.cs">
@@ -171,11 +175,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\BusinessClientAddPageFunction.xaml">
+    <Page Include="Views\business_client\BusinessClientAddPageFunction.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\BusinessClientPage.xaml">
+    <Page Include="Views\business_client\BusinessClientDetailsPageFunction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\business_client\BusinessClientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

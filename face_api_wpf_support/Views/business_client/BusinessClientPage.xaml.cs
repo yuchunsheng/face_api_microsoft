@@ -27,7 +27,8 @@ namespace face_api_wpf_support.Views
         
         private void go_home(object sender, System.Windows.RoutedEventArgs e)
         {
-            Page home_page = new ListViewPage();
+            ListViewPage home_page = new ListViewPage();
+            home_page.Load_business_client();
             this.NavigationService.Navigate(home_page);
 
         }
@@ -37,23 +38,32 @@ namespace face_api_wpf_support.Views
             business_client_viewmodel.load_business_client();
         }
 
-        private void details_clicked(object sender, RoutedEventArgs e)
-        {
-            var myValue = ((Button)sender).Tag;
-        }
+        //private void details_clicked(object sender, RoutedEventArgs e)
+        //{
+        //    var myValue = ((Button)sender).Tag;
+        //}
 
         
-        private void add_new_clicked(object sender, RoutedEventArgs e)
+        private void page_function_return(object sender, ReturnEventArgs<string> e)
+        {
+            this.business_client_viewmodel.load_business_client();
+        }
+
+        private void add_page_checked(object sender, RoutedEventArgs e)
         {
             PageFunction<string> add_business_client = new BusinessClientAddPageFunction();
             add_business_client.Return += new ReturnEventHandler<string>(page_function_return);
 
             this.NavigationService.Navigate(add_business_client);
+            
         }
 
-        private void page_function_return(object sender, ReturnEventArgs<string> e)
+        private void details_page_checked(object sender, RoutedEventArgs e)
         {
-            this.business_client_viewmodel.load_business_client();
+            PageFunction<string> details_page = business_client_viewmodel.next_page;
+            details_page.Return += new ReturnEventHandler<string>(page_function_return);
+
+            this.NavigationService.Navigate(details_page);
         }
     }
 }
