@@ -28,5 +28,10 @@ namespace face_api_wpf_support.Views.business_client
 
             DataContext = details_model;
         }
+
+        private void next_page_checked(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(details_model.next_page);
+        }
     }
 }

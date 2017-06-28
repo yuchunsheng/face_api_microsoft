@@ -102,10 +102,6 @@ namespace face_api_wpf_support.ViewModels
         }
 
         
-
-        
-
-        
         private void show_details_page(object obj)
         {
             int client_id = Convert.ToInt32(obj);

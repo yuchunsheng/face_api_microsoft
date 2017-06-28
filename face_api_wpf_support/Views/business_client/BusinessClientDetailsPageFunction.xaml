@@ -6,11 +6,51 @@
     x:TypeArguments="sys:String"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Regular"
+    TextElement.FontSize="13"
+    TextOptions.TextFormattingMode="Ideal" 
+    TextOptions.TextRenderingMode="Auto"        
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
     xmlns:local="clr-namespace:face_api_wpf_support.Views.business_client"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="300"
     Title="BusinessClientDetailsPageFunction">
+
+    <Page.Resources>
+        <Style x:Key="ListViewStyle" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+        </Style>
+    </Page.Resources>
+    
     <Grid>
-        <TextBox Text="Details"></TextBox>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="Auto"/>
+
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
+            <Button Content="Go Home" Command="{Binding goto_next_page_command}" />
+            <CheckBox IsChecked="{Binding next_page_checked}" Checked="next_page_checked" Visibility="Hidden" />
+
+        </StackPanel>
+
+        <materialDesign:Card Grid.Row="1" Grid.Column="0" Margin="16" Height="600">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Update" Command="{Binding update_command}" />
+                    <Button Content="Delete" Command="{Binding delete_command}" />
+                </StackPanel>
+
+                <TextBox Text="{Binding item.Name}"></TextBox>
+            </StackPanel>
+            
+        </materialDesign:Card>
     </Grid>
 </PageFunction>
