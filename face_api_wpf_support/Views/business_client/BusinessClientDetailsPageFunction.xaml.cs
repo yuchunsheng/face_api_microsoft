@@ -33,5 +33,6 @@ namespace face_api_wpf_support.Views.business_client
         {
             this.NavigationService.Navigate(details_model.next_page);
         }
+
     }
 }

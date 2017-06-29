@@ -1,6 +1,8 @@
 ﻿using face_api_commons.Common;
 using face_api_commons.Model;
 using face_api_wpf_support.Views;
+using face_api_wpf_support.Views.business_client.repository;
+using face_api_wpf_support.Views.business_client.users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,6 +76,56 @@ namespace face_api_wpf_support.ViewModels
             BusinessClientPage home_page = new BusinessClientPage();
             home_page.init();
             next_page = home_page;
+            next_page_checked = true;
+
+        }
+
+        RelayCommand _go_repository_command;
+        public RelayCommand goto_repository_page_command
+        {
+            get
+            {
+                if (_go_repository_command == null)
+                    _go_repository_command = new RelayCommand(new Action<object>(go_repository_page));
+                return _go_repository_command;
+            }
+            set
+            {
+                _go_repository_command = value;
+            }
+
+        }
+
+        private void go_repository_page(object obj)
+        {
+            RepositoryPage repository_page = new RepositoryPage();
+            repository_page.init((int)business_client.Id);
+            next_page = repository_page;
+            next_page_checked = true;
+
+        }
+
+        RelayCommand _go_user_command;
+        public RelayCommand goto_user_page_command
+        {
+            get
+            {
+                if (_go_user_command == null)
+                    _go_user_command = new RelayCommand(new Action<object>(go_user_page));
+                return _go_user_command;
+            }
+            set
+            {
+                _go_user_command = value;
+            }
+
+        }
+
+        private void go_user_page(object obj)
+        {
+            UserPage user_page = new UserPage();
+            //home_page.init();
+            next_page = user_page;
             next_page_checked = true;
 
         }

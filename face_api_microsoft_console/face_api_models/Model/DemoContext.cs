@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace face_api_commons.Model
 {
@@ -41,9 +43,14 @@ namespace face_api_commons.Model
             {
                 entity.ToTable("face_repository");
 
+                entity.Property(e => e.Availiable)
+                    .HasColumnName("availiable")
+                    .HasColumnType("integer");
+
                 entity.Property(e => e.FaceRepositoryId)
                     .IsRequired()
-                    .HasColumnName("face_repository_id");
+                    .HasColumnName("face_repository_id")
+                    .HasColumnType("text");
             });
 
             modelBuilder.Entity<FaceRepositoryBusinessClient>(entity =>

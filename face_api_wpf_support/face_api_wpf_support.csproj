@@ -127,6 +127,9 @@
     <Compile Include="ViewModels\BusinessClientAddViewModel.cs" />
     <Compile Include="ViewModels\BusinessClientDetailsViewModel.cs" />
     <Compile Include="ViewModels\BusinessClientViewModel.cs" />
+    <Compile Include="ViewModels\business_client\repository\AddRepositoryViewModel.cs" />
+    <Compile Include="ViewModels\business_client\repository\RepositoryViewModel.cs" />
+    <Compile Include="ViewModels\business_client\users\UserViewModel.cs" />
     <Compile Include="ViewModels\Employee.cs" />
     <Compile Include="ViewModels\Item.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
@@ -142,6 +145,15 @@
     </Compile>
     <Compile Include="Views\business_client\BusinessClientPage.xaml.cs">
       <DependentUpon>BusinessClientPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\business_client\repository\AddRepositoryPage.xaml.cs">
+      <DependentUpon>AddRepositoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\business_client\repository\RepositoryPage.xaml.cs">
+      <DependentUpon>RepositoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\business_client\users\UserPage.xaml.cs">
+      <DependentUpon>UserPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FactoryAsyncPage.xaml.cs">
       <DependentUpon>FactoryAsyncPage.xaml</DependentUpon>
@@ -184,6 +196,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\business_client\BusinessClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\business_client\repository\AddRepositoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\business_client\repository\RepositoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\business_client\users\UserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

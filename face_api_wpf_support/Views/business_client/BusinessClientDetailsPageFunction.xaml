@@ -37,6 +37,9 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
             <Button Content="Go Home" Command="{Binding goto_next_page_command}" />
+            <Button Content="Repository Manage" Command="{Binding goto_repository_page_command}" CommandParameter="Binding item.id" />
+            <Button Content="Users Manage" Command="{Binding goto_user_page_command}" CommandParameter="Binding item.id" />
+            
             <CheckBox IsChecked="{Binding next_page_checked}" Checked="next_page_checked" Visibility="Hidden" />
 
         </StackPanel>
