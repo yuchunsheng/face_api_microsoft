@@ -99,7 +99,7 @@ namespace face_api_wpf_support.ViewModels
         private void go_repository_page(object obj)
         {
             RepositoryPage repository_page = new RepositoryPage();
-            repository_page.init((int)business_client.Id);
+            repository_page.load_item((int)business_client.Id);
             next_page = repository_page;
             next_page_checked = true;
 

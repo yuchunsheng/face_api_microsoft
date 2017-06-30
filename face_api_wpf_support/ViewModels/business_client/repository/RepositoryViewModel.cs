@@ -11,7 +11,7 @@ using System.Windows.Controls;
 
 namespace face_api_wpf_support.ViewModels.business_client.repository
 {
-    class RepositoryViewModel: ObservableObject
+    public class RepositoryViewModel: ObservableObject
     {
         private List<String> _reporitory_list;
 
@@ -54,7 +54,7 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
         }
 
         RelayCommand _go_home_command;
-        public RelayCommand goto_next_page_command
+        public RelayCommand go_home_command
         {
             get
             {
@@ -72,24 +72,63 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
         private void go_home(object obj)
         {
             BusinessClientDetailsPageFunction home_page = new BusinessClientDetailsPageFunction();
-            home_page.details_model.load_item(business_client_id);
+            home_page.details_model.load_item((int)obj);
             next_page = home_page;
             next_page_checked = true;
 
         }
 
-        private int business_client_id = 0;
+        RelayCommand _add_repository_command;
+        public RelayCommand add_repository_command
+        {
+            get
+            {
+                if (_add_repository_command == null)
+                    _add_repository_command = new RelayCommand(new Action<object>(add_repository));
+                return _add_repository_command;
+            }
+            set
+            {
+                _add_repository_command = value;
+            }
+
+        }
+
+        private void add_repository(object obj)
+        {
+            AddRepositoryPage add_repository_page = new AddRepositoryPage();
+            add_repository_page.load_item(obj);
+            next_page = add_repository_page;
+            next_page_checked = true;
+
+        }
+
+        private int _business_client_id = 0;
+        public int Business_client_id
+        {
+            get
+            {
+                return _business_client_id;
+            }
+
+            set
+            {
+                _business_client_id = value;
+            }
+        }
+
+        
 
         public RepositoryViewModel()
         {
             
         }
 
-        public void init(int id)
+        public void init(object id)
         {
-            this.business_client_id = id;
+            Business_client_id = (int)id;
 
-            if (business_client_id != 0)
+            if (Business_client_id != 0)
             {
                 Task<List<string>> get_repository_task = Task<List<string>>.Factory.StartNew(
                 () =>
@@ -100,7 +139,7 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
                         var query =
                            from repository in context.FaceRepository
                            join face_repository in context.FaceRepositoryBusinessClient on repository.Id equals face_repository.FaceReposityId
-                           where face_repository.BusinessClientId == business_client_id
+                           where face_repository.BusinessClientId == Business_client_id
                            select repository;
 
                         foreach (var repository in query)

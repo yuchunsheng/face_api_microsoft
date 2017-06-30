@@ -33,28 +33,50 @@
 
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
-            <Button Content="Go Home" Command="{Binding goto_next_page_command}" />
-            <!--<Button Content="Repository Manage" Command="{Binding goto_repository_page_command}" CommandParameter="Binding item.id" />
-            <Button Content="Users Manage" Command="{Binding goto_user_page_command}" CommandParameter="Binding item.id" />-->
+            <Button Content="Go Home" Command="{Binding go_home_command}" CommandParameter="{Binding Business_client_id}" />
+            <Button Content="Add Repository" Command="{Binding add_repository_command}" CommandParameter="{Binding Business_client_id}" />
+            <!--<Button Content="Users Manage" Command="{Binding goto_user_page_command}" CommandParameter="Binding item.id" />-->
 
             <CheckBox IsChecked="{Binding next_page_checked}" Checked="next_page_checked" Visibility="Hidden" />
 
         </StackPanel>
 
         <materialDesign:Card Grid.Row="1" Grid.Column="0" Margin="16" Height="600">
-            <StackPanel Grid.Row="1" Grid.Column="0" Margin="10" Orientation="Vertical">
-                <Button Content="Add Repository"  />
-                <ListView x:Name="test_list"   ItemsSource="{Binding Reporitory_list}" ScrollViewer.CanContentScroll="True" 
-                          ScrollViewer.VerticalScrollBarVisibility="Visible"  HorizontalAlignment="Left" HorizontalContentAlignment="Left">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="Auto"/>
+
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
+                    <Label Content="Existing Repository"  />
+                </StackPanel>
+
+                <ListView x:Name="test_list" Grid.Row="1" Grid.Column="0"  ItemsSource="{Binding Reporitory_list}" ScrollViewer.CanContentScroll="True" 
+                        ScrollViewer.VerticalScrollBarVisibility="Visible"  HorizontalAlignment="Left" HorizontalContentAlignment="Left">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Name" Width="320" DisplayMemberBinding="{Binding}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Existing Repository" Width="320" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn  HeaderContainerStyle="{StaticResource ListViewStyle}" Header="" Width="320">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Delete"></Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            
+                            
 
                         </GridView>
 
                     </ListView.View>
                 </ListView>
-            </StackPanel>
+
+            </Grid>
             
         </materialDesign:Card>
 

@@ -1,9 +1,24 @@
-﻿<Page x:Class="face_api_wpf_support.Views.business_client.repository.AddRepositoryPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+﻿
+private AddRepositoryViewModel repository_view_model = new AddRepositoryViewModel();
+
+        public AddRepositoryPage()
+        {
+            InitializeComponent();
+            DataContext = repository_view_model;
+        }
+
+        public void load_item(object business_client_id)
+        {
+            repository_view_model.init(business_client_id);
+        }
+
+        private void next_page_checked(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(repository_view_model.next_page);
+        }
+
+
+	  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       TextElement.FontWeight="Regular"
       TextElement.FontSize="13"
@@ -11,18 +26,15 @@
       TextOptions.TextRenderingMode="Auto"        
       Background="{DynamicResource MaterialDesignPaper}"
       FontFamily="{DynamicResource MaterialDesignFont}"
-      xmlns:local="clr-namespace:face_api_wpf_support.Views.business_client.repository"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="AddRepositoryPage">
 
-    <Page.Resources>
+
+	  <Page.Resources>
         <Style x:Key="ListViewStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="HorizontalContentAlignment" Value="Left" />
         </Style>
     </Page.Resources>
 
-    <Grid>
+	<Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
 
@@ -33,8 +45,8 @@
 
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
-            <Button Content="Back" Command="{Binding go_back_command}" CommandParameter="{Binding Business_client_id}"  />
-            <Button Content="Add new" Command="{Binding create_face_repository_command}" CommandParameter="{Binding Business_client_id}" />
+            <Button Content="Cancel"  />
+            <Button Content="Add new" />
 
             <CheckBox IsChecked="{Binding next_page_checked}" Checked="next_page_checked" Visibility="Hidden" />
 
@@ -62,4 +74,3 @@
         </materialDesign:Card>
 
     </Grid>
-</Page>

@@ -21,7 +21,8 @@ namespace face_api_wpf_support.Views.business_client.repository
     /// </summary>
     public partial class RepositoryPage : Page
     {
-        private RepositoryViewModel repository_view_model = new RepositoryViewModel();
+        public RepositoryViewModel repository_view_model = new RepositoryViewModel();
+
         public RepositoryPage()
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace face_api_wpf_support.Views.business_client.repository
             DataContext = repository_view_model;
         }
 
-        public void init(int id)
+        public void load_item(object id)
         {
             repository_view_model.init(id);
         }
