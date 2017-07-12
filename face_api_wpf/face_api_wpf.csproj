@@ -265,10 +265,6 @@
       <Project>{25d58ba5-660f-407b-803c-22b4547c09dc}</Project>
       <Name>Microsoft.ProjectOxford.Face</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cognitive-Common-Windows\ClientLibrary\Microsoft.ProjectOxford.Common.csproj">
-      <Project>{e858ebf6-cdd6-4f41-9e9d-0644dfa229e5}</Project>
-      <Name>Microsoft.ProjectOxford.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\face_api_microsoft_console\face_api_models\face_api_commons.csproj">
       <Project>{f71a9d40-42be-4347-8c7f-e8ab53fe3a46}</Project>
       <Name>face_api_commons</Name>

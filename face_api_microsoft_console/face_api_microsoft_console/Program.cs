@@ -2,20 +2,78 @@
 using System.IO;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using Microsoft.ProjectOxford.Face;
+using Microsoft.ProjectOxford.Face.Contract;
+using System.Collections.ObjectModel;
 
 namespace CSHttpClientSample
 {
     static class Program
     {
+        
         static void Main()
         {
             Console.Write("Enter the path to the JPEG image with faces to identify:");
             string imageFilePath = Console.ReadLine();
 
-            MakeDetectRequest(imageFilePath);
+            //MakeDetectRequest(imageFilePath);
+            CallFaceClientService(imageFilePath);
 
             Console.WriteLine("\n\n\nWait for the result below, then hit ENTER to exit...\n\n\n");
             Console.ReadLine();
+        }
+
+        static async void CallFaceClientService(string imageFilePath)
+        {
+            using (var fileStream = File.OpenRead(imageFilePath))
+            {
+                try
+                {
+                    string subscriptionKey = "??";
+                    var faceServiceClient = new FaceServiceClient(subscriptionKey);
+                    Microsoft.ProjectOxford.Face.Contract.Face[] faces = await faceServiceClient.DetectAsync(fileStream, false, true, new FaceAttributeType[] { FaceAttributeType.Gender, FaceAttributeType.Age, FaceAttributeType.Smile, FaceAttributeType.Glasses });
+
+                    Console.WriteLine("Response: Success. Detected {0} face(s) in {1}", faces.Length, imageFilePath);
+                    Console.WriteLine(string.Format("{0} face(s) has been detected", faces.Length));
+
+                    ObservableCollection<Face> DetectedFaces = new ObservableCollection<Face>();
+
+                    foreach (var face in faces)
+                    {
+                        DetectedFaces.Add(new Face()
+                        {
+                            ImagePath = imageFilePath,
+                            Left = face.FaceRectangle.Left,
+                            Top = face.FaceRectangle.Top,
+                            Width = face.FaceRectangle.Width,
+                            Height = face.FaceRectangle.Height,
+                            FaceId = face.FaceId.ToString(),
+                            Gender = face.FaceAttributes.Gender,
+                            Age = string.Format("{0:#} years old", face.FaceAttributes.Age),
+                            IsSmiling = face.FaceAttributes.Smile > 0.0 ? "Smile" : "Not Smile",
+                            Glasses = face.FaceAttributes.Glasses.ToString(),
+                        });
+                    }
+
+
+                }
+                catch (Exception ex) {
+                    Console.WriteLine("Response: {0}", ex.Message);
+                    if (ex is FaceAPIException )
+                    {
+                        Console.WriteLine("Response: {0}. {1}", ((FaceAPIException)ex).ErrorCode, ((FaceAPIException)ex).ErrorMessage);
+                        return;
+                    }
+
+                    throw;
+                }
+                
+                //catch (FaceAPIException ex)
+                //{
+                //    Console.WriteLine("Response: {0}. {}", ex.ErrorCode,  ex.ErrorMessage);
+                //    return;
+                //}
+            }
         }
 
         static byte[] GetImageAsByteArray(string imageFilePath)
@@ -30,7 +88,7 @@ namespace CSHttpClientSample
             var client = new HttpClient();
 
             // Request headers - replace this example key with your valid key.
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "36d7fbe10dfc46e7887edde19be2214b");
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "????");
 
             // Request parameters.
             string queryString = "returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender";

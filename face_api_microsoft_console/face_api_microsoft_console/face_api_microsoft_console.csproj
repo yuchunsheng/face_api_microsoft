@@ -33,6 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\cyu.NTDWRHA\.nuget\packages\Newtonsoft.Json\10.0.2\lib\portable-net45+win8+wpa81+wp8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,8 +46,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Face.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -53,10 +60,6 @@
     <ProjectReference Include="..\..\ClientLibrary\Microsoft.ProjectOxford.Face.csproj">
       <Project>{25d58ba5-660f-407b-803c-22b4547c09dc}</Project>
       <Name>Microsoft.ProjectOxford.Face</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Cognitive-Common-Windows\ClientLibrary\Microsoft.ProjectOxford.Common.csproj">
-      <Project>{e858ebf6-cdd6-4f41-9e9d-0644dfa229e5}</Project>
-      <Name>Microsoft.ProjectOxford.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

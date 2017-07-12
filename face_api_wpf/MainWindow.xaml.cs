@@ -27,8 +27,8 @@ namespace face_api_wpf
             main_frame.NavigationService.Navigate(new LoginPage());
         }
 
-        private readonly IFaceServiceClient faceServiceClient = new FaceServiceClient("36d7fbe10dfc46e7887edde19be2214b",
-            "https://westcentralus.api.cognitive.microsoft.com/face/v1.0");
+        //private readonly IFaceServiceClient faceServiceClient = new FaceServiceClient("36d7fbe10dfc46e7887edde19be2214b",
+        //    "https://westcentralus.api.cognitive.microsoft.com/face/v1.0");
 
        
 

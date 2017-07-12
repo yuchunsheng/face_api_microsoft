@@ -58,9 +58,9 @@ namespace Microsoft.ProjectOxford.Face
         Gender,
 
         /// <summary>
-        /// Analyses head pose
+        /// Analyses facial hair
         /// </summary>
-        HeadPose,
+        FacialHair,
 
         /// <summary>
         /// Analyses whether is smiling
@@ -68,70 +68,14 @@ namespace Microsoft.ProjectOxford.Face
         Smile,
 
         /// <summary>
-        /// Analyses facial hair
+        /// Analyses head pose
         /// </summary>
-        FacialHair,
+        HeadPose,
 
         /// <summary>
         /// Analyses glasses type
         /// </summary>
         Glasses,
-
-        /// <summary>
-        /// Analyses emotion
-        /// </summary>
-        Emotion,
-
-        /// <summary>
-        /// Analyses hair
-        /// </summary>
-        Hair,
-
-        /// <summary>
-        /// Analyses makeup
-        /// </summary>
-        Makeup,
-
-        /// <summary>
-        /// Analyses occlusion
-        /// </summary>
-        Occlusion,
-
-        /// <summary>
-        /// Analyses accessory
-        /// </summary>
-        Accessories,
-
-        /// <summary>
-        /// Analyses blur
-        /// </summary>
-        Blur,
-
-        /// <summary>
-        /// Analyses exposure
-        /// </summary>
-        Exposure,
-
-        /// <summary>
-        /// Analyses noise
-        /// </summary>
-        Noise
-    }
-
-    /// <summary>
-    /// two working modes of Face - Find Similar
-    /// </summary>
-    public enum FindSimilarMatchMode
-    {
-        /// <summary>
-        /// matchPerson mode of Face - Find Similar, return the similar faces of the same person with the query face.
-        /// </summary>
-        matchPerson,
-
-        /// <summary>
-        /// matchFace mode of Face - Find Similar, return the similar faces of the query face, ignoring if they belong to the same person.
-        /// </summary>
-        matchFace
     }
 
     #endregion Enumerations
@@ -212,7 +156,7 @@ namespace Microsoft.ProjectOxford.Face
         /// <param name="name">The name.</param>
         /// <param name="userData">The user data.</param>     
         /// <returns>Task object.</returns>
-        Task CreateFaceListAsync(string faceListId, string name, string userData = null);
+        Task CreateFaceListAsync(string faceListId, string name, string userData);
 
         /// <summary>
         /// Creates a person asynchronously.
@@ -306,36 +250,12 @@ namespace Microsoft.ProjectOxford.Face
         /// Finds the similar faces asynchronously.
         /// </summary>
         /// <param name="faceId">The face identifier.</param>
-        /// <param name="faceIds">The face identifiers.</param>
-        /// <param name="mode">Algorithm mode option, default as "matchPerson".</param>
-        /// <param name="maxNumOfCandidatesReturned">The max number of candidates returned.</param>
-        /// <returns>
-        /// The similar faces.
-        /// </returns>
-        Task<SimilarFace[]> FindSimilarAsync(Guid faceId, Guid[] faceIds, FindSimilarMatchMode mode, int maxNumOfCandidatesReturned = 20);
-
-        /// <summary>
-        /// Finds the similar faces asynchronously.
-        /// </summary>
-        /// <param name="faceId">The face identifier.</param>
         /// <param name="faceListId">The face list identifier.</param>
         /// <param name="maxNumOfCandidatesReturned">The max number of candidates returned.</param>
         /// <returns>
         /// The similar persisted faces.
         /// </returns>
         Task<SimilarPersistedFace[]> FindSimilarAsync(Guid faceId, string faceListId, int maxNumOfCandidatesReturned = 20);
-
-        /// <summary>
-        /// Finds the similar faces asynchronously.
-        /// </summary>
-        /// <param name="faceId">The face identifier.</param>
-        /// <param name="faceListId">The face list identifier.</param>
-        /// <param name="mode">Algorithm mode option, default as "matchPerson".</param>
-        /// <param name="maxNumOfCandidatesReturned">The max number of candidates returned.</param>
-        /// <returns>
-        /// The similar persisted faces.
-        /// </returns>
-        Task<SimilarPersistedFace[]> FindSimilarAsync(Guid faceId, string faceListId, FindSimilarMatchMode mode, int maxNumOfCandidatesReturned = 20);
 
         /// <summary>
         /// Gets the face list asynchronously.
@@ -369,19 +289,10 @@ namespace Microsoft.ProjectOxford.Face
         Task<PersonGroup> GetPersonGroupAsync(string personGroupId);
 
         /// <summary>
-        /// Asynchronously list the person groups.
+        /// Gets all person groups asynchronously.
         /// </summary>
         /// <returns>Person group entity array.</returns>
-        [Obsolete("use ListPersonGroupsAsync instead")]
         Task<PersonGroup[]> GetPersonGroupsAsync();
-
-        /// <summary>
-        /// Asynchronously list the top person groups whose Id is larger than "start".
-        /// </summary>
-        /// <param name="start">the start point string in listing person groups</param>
-        /// <param name="top">the number of person groups to list</param>
-        /// <returns>Person group entity array.</returns>
-        Task<PersonGroup[]> ListPersonGroupsAsync(string start = "", int top = 1000);
 
         /// <summary>
         /// Gets person group training status asynchronously.
@@ -391,24 +302,14 @@ namespace Microsoft.ProjectOxford.Face
         Task<TrainingStatus> GetPersonGroupTrainingStatusAsync(string personGroupId);
 
         /// <summary>
-        /// Gets persons inside a person group asynchronously.
+        /// Gets all persons inside a person group asynchronously.
         /// </summary>
         /// <param name="personGroupId">The person group id.</param>
         /// <returns>
         /// The person entity array.
         /// </returns>
-        [Obsolete("use ListPersonsAsync instead")]
         Task<Person[]> GetPersonsAsync(string personGroupId);
 
-        /// <summary>
-        /// Asynchronously list the top persons whose Id is larger than "start".
-        /// </summary>
-        /// <param name="personGroupId">The person group id.</param>
-        /// <param name="start">The start point string in listing persons</param>
-        /// <param name="top">The number of persons to list</param>
-        /// <returns>Person entity array.</returns>
-        Task<Person[]> ListPersonsAsync(string personGroupId, string start = "", int top = 1000);
-        
         /// <summary>
         /// Groups the face asynchronously.
         /// </summary>
@@ -424,16 +325,6 @@ namespace Microsoft.ProjectOxford.Face
         /// <param name="maxNumOfCandidatesReturned">The maximum number of candidates returned for each face.</param>
         /// <returns>The identification results</returns>
         Task<IdentifyResult[]> IdentifyAsync(string personGroupId, Guid[] faceIds, int maxNumOfCandidatesReturned = 1);
-
-        /// <summary>
-        /// Identities the faces in a given person group asynchronously.
-        /// </summary>
-        /// <param name="personGroupId">The person group id.</param>
-        /// <param name="faceIds">The face ids.</param>
-        /// <param name="maxNumOfCandidatesReturned">The maximum number of candidates returned for each face.</param>
-        /// <param name="confidenceThreshold">user-specified confidence threshold.</param>
-        /// <returns>The identification results</returns>
-        Task<IdentifyResult[]> IdentifyAsync(string personGroupId, Guid[] faceIds, float confidenceThreshold, int maxNumOfCandidatesReturned = 1);
 
         /// <summary>
         /// Lists the face lists asynchronously.
@@ -493,15 +384,6 @@ namespace Microsoft.ProjectOxford.Face
         /// <param name="faceId2">The face id 2.</param>
         /// <returns>The verification result.</returns>
         Task<VerifyResult> VerifyAsync(Guid faceId1, Guid faceId2);
-
-        /// <summary>
-        /// Verify whether one face belong to a person.
-        /// </summary>
-        /// <param name="faceId"></param>
-        /// <param name="personGroupId"></param>
-        /// <param name="personId"></param>
-        /// <returns></returns>
-        Task<VerifyResult> VerifyAsync(Guid faceId, string personGroupId, Guid personId);
 
         #endregion Methods
     }

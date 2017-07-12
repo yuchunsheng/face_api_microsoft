@@ -78,13 +78,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cognitive-Common-Windows\ClientLibrary\Microsoft.ProjectOxford.Common.csproj">
-      <Project>{e858ebf6-cdd6-4f41-9e9d-0644dfa229e5}</Project>
-      <Name>Microsoft.ProjectOxford.Common</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\face_api_microsoft_console\packages\Newtonsoft.Json.10.0.2\lib\portable-net45+win8+wpa81+wp8\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
