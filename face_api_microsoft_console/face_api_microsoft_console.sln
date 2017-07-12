@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "face_api_commons", "face_ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "face_api_wpf_support", "..\face_api_wpf_support\face_api_wpf_support.csproj", "{8EEDB3B2-1570-41CB-99DC-B9EEBCBEB202}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.ProjectOxford.Common", "..\Cognitive-Common-Windows\ClientLibrary\Microsoft.ProjectOxford.Common.csproj", "{E858EBF6-CDD6-4F41-9E9D-0644DFA229E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{8EEDB3B2-1570-41CB-99DC-B9EEBCBEB202}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EEDB3B2-1570-41CB-99DC-B9EEBCBEB202}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EEDB3B2-1570-41CB-99DC-B9EEBCBEB202}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E858EBF6-CDD6-4F41-9E9D-0644DFA229E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E858EBF6-CDD6-4F41-9E9D-0644DFA229E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E858EBF6-CDD6-4F41-9E9D-0644DFA229E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E858EBF6-CDD6-4F41-9E9D-0644DFA229E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

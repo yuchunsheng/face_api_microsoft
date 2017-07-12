@@ -5,7 +5,7 @@
 // Microsoft Cognitive Services (formerly Project Oxford): https://www.microsoft.com/cognitive-services
 // 
 // Microsoft Cognitive Services (formerly Project Oxford) GitHub:
-// https://github.com/Microsoft/ProjectOxford-ClientSDK
+// https://github.com/Microsoft/Cognitive-Common-Windows
 // 
 // Copyright (c) Microsoft Corporation
 // All rights reserved.
@@ -98,11 +98,23 @@ namespace SampleUserControlLibrary
             set;
         }
 
+        public string SubscriptionEndpoint
+        {
+            get;
+            set;
+        }
+
+        public void SetSubscriptionPageEndpoint(string endpoint)
+        {
+            _subscriptionPage.SetSubscriptionEndpoint(endpoint);
+        }
+
         public SampleScenarios()
         {
             InitializeComponent();
             _subscriptionPage = new SubscriptionKeyPage(this);
             SubscriptionKey = _subscriptionPage.SubscriptionKey;
+            SubscriptionEndpoint = _subscriptionPage.SubscriptionEndpoint;
 
             SampleTitle = "Replace SampleNames with SampleScenarios.SampleTitle property";
 

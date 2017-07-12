@@ -1,17 +1,15 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
+﻿// 
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license.
-//
+// 
 // Microsoft Cognitive Services (formerly Project Oxford): https://www.microsoft.com/cognitive-services
-//
+// 
 // Microsoft Cognitive Services (formerly Project Oxford) GitHub:
 // https://github.com/Microsoft/Cognitive-Common-Windows
-//
+// 
 // Copyright (c) Microsoft Corporation
 // All rights reserved.
-//
+// 
 // MIT License:
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -20,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-//
+// 
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-//
+// 
 // THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,49 +29,68 @@
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// 
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Microsoft.ProjectOxford.Common.Contract
 {
-    /// <summary>
-    /// Common base class for top-level video result objects.
-    /// </summary>
-    public class VideoResultBase
+    public class Emotion
     {
         /// <summary>
-        /// Gets or sets version of the JSON format.
+        /// Gets or sets the face rectangle.
         /// </summary>
-        public int Version { get; set; }
+        /// <value>
+        /// The face rectangle.
+        /// </value>
+        public Rectangle FaceRectangle { get; set; }
 
         /// <summary>
-        /// Gets or sets tick unit, in Hertz.
+        /// Gets or sets the emotion scores.
         /// </summary>
-        public double Timescale { get; set; }
+        /// <value>
+        /// The emotion scores.
+        /// </value>
+        public EmotionScores Scores { get; set; }
 
-        /// <summary>
-        /// Gets or sets video offset, in ticks.
-        /// </summary>
-        public Int64 Offset { get; set; }
+        #region overrides
+        public override bool Equals(object o)
+        {
+            if (o == null) return false;
 
-        /// <summary>
-        /// Gets or sets rate of frames (frames/second).
-        /// </summary>
-        public double Framerate { get; set; }
+            var other = o as Emotion;
 
-        /// <summary>
-        /// Gets or sets width of the frame, in pixels.
-        /// </summary>
-        public int Width { get; set; }
+            if (other == null) return false;
 
-        /// <summary>
-        /// Gets or sets height of frames, in pixels.
-        /// </summary>
-        public int Height { get; set; }
+            if (this.FaceRectangle == null)
+            {
+                if (other.FaceRectangle != null) return false;
+            }
+            else
+            {
+                if (!this.FaceRectangle.Equals(other.FaceRectangle)) return false;
+            }
 
-        /// <summary>
-        /// Gets or sets rotation of the video, in degrees clockwise.
-        /// </summary>
-        public int? Rotation { get; set; }
+            if (this.Scores == null)
+            {
+                return other.Scores == null;
+            }
+            else
+            {
+                return this.Scores.Equals(other.Scores);
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            int r = (FaceRectangle == null) ? 0x33333333 : FaceRectangle.GetHashCode();
+            int s = (Scores == null) ? 0xccccccc : Scores.GetHashCode();
+            return r ^ s;
+        }
+        #endregion
     }
 }

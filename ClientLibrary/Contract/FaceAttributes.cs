@@ -104,10 +104,10 @@ namespace Microsoft.ProjectOxford.Face.Contract
         /// <value>
         /// The emotion.
         /// </value>
-        //public Microsoft.ProjectOxford.Common.Contract.EmotionScores Emotion
-        //{
-        //    get; set;
-        //}
+        public Microsoft.ProjectOxford.Common.Contract.EmotionScores Emotion
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the glasses type.

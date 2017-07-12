@@ -38,6 +38,8 @@
   <ItemGroup>
     <Compile Include="ClientError.cs" />
     <Compile Include="ClientException.cs" />
+    <Compile Include="Contract\Emotion.cs" />
+    <Compile Include="Contract\EmotionScores.cs" />
     <Compile Include="Contract\VideoFace.cs" />
     <Compile Include="Contract\VideoFragment.cs" />
     <Compile Include="Contract\VideoOperation.cs" />
@@ -52,19 +54,18 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>C:\Users\cyu.NTDWRHA\.nuget\packages\Newtonsoft.Json\10.0.2\lib\portable-net45+win8+wpa81+wp8\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="System.Net.Http, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Extensions.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.Primitives, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>

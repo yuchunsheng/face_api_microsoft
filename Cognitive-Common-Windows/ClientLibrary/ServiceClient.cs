@@ -5,7 +5,7 @@
 // Microsoft Cognitive Services (formerly Project Oxford): https://www.microsoft.com/cognitive-services
 // 
 // Microsoft Cognitive Services (formerly Project Oxford) GitHub:
-// https://github.com/Microsoft/ProjectOxford-ClientSDK
+// https://github.com/Microsoft/Cognitive-Common-Windows
 // 
 // Copyright (c) Microsoft Corporation
 // All rights reserved.
@@ -120,7 +120,7 @@ namespace Microsoft.ProjectOxford.Common
         /// <exception cref="ClientException">Service exception</exception>
         protected async Task<TResponse> PostAsync<TRequest, TResponse>(string apiUrl, TRequest requestBody)
         {
-            return await SendAsync<TRequest, TResponse>(HttpMethod.Post, apiUrl, requestBody);
+            return await SendAsync<TRequest, TResponse>(HttpMethod.Post, apiUrl, requestBody).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace Microsoft.ProjectOxford.Common
         /// <exception cref="ClientException">Service exception</exception>
         protected async Task<TResponse> GetAsync<TRequest, TResponse>(string apiUrl, TRequest requestBody)
         {
-            return await SendAsync<TRequest, TResponse>(HttpMethod.Get, apiUrl, requestBody);
+            return await SendAsync<TRequest, TResponse>(HttpMethod.Get, apiUrl, requestBody).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -168,13 +168,13 @@ namespace Microsoft.ProjectOxford.Common
                 }
             }
 
-            HttpResponseMessage response = await _httpClient.SendAsync(request);
+            HttpResponseMessage response = await _httpClient.SendAsync(request).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 string responseContent = null;
                 if (response.Content != null)
                 {
-                    responseContent = await response.Content.ReadAsStringAsync();
+                    responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
 
                 if (!string.IsNullOrWhiteSpace(responseContent))
@@ -198,7 +198,7 @@ namespace Microsoft.ProjectOxford.Common
             {
                 if (response.Content != null && response.Content.Headers.ContentType.MediaType.Contains("application/json"))
                 {
-                    var errorObjectString = await response.Content.ReadAsStringAsync();
+                    var errorObjectString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var wrappedClientError = JsonConvert.DeserializeObject<WrappedClientError>(errorObjectString);
                     if (wrappedClientError?.Error != null)
                     {
