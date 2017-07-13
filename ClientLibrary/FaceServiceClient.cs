@@ -157,6 +157,12 @@ namespace Microsoft.ProjectOxford.Face
 
         #region Constructors
 
+        public FaceServiceClient()
+        {
+            _subscriptionKey = "57ad65f506f94d1cae5aba620ff67324";
+            _httpClient = new HttpClient();
+            _httpClient.DefaultRequestHeaders.Add(SubscriptionKeyName, _subscriptionKey);
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="FaceServiceClient"/> class.
         /// </summary>
@@ -167,6 +173,8 @@ namespace Microsoft.ProjectOxford.Face
             _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.Add(SubscriptionKeyName, subscriptionKey);
         }
+
+
 
         /// <summary>
         /// Finalizes an instance of the <see cref="FaceServiceClient"/> class.

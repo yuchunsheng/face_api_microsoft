@@ -1,4 +1,5 @@
 ﻿using face_api_wpf_support.ViewModels;
+using face_api_wpf_support.Views.repository;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -80,6 +81,13 @@ namespace face_api_wpf_support.Views
             business_client_page.init();
             this.NavigationService.Navigate(business_client_page);
 
+        }
+
+        private void manage_repository_page(object sender, RoutedEventArgs e)
+        {
+            ManageRepositoryPage mange_repository_page = new ManageRepositoryPage();
+            mange_repository_page.load_item();
+            this.NavigationService.Navigate(mange_repository_page);
         }
     }
 }

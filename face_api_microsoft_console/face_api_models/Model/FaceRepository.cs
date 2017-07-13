@@ -7,6 +7,8 @@ namespace face_api_commons.Model
     {
         public long Id { get; set; }
         public string FaceRepositoryId { get; set; }
+        public string FaceRepositoryName { get; set; }
+        public string FaceRepositoryComments { get; set; }
         public long Availiable { get; set; }
     }
 }

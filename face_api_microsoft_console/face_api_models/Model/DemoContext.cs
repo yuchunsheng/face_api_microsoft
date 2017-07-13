@@ -51,6 +51,14 @@ namespace face_api_commons.Model
                     .IsRequired()
                     .HasColumnName("face_repository_id")
                     .HasColumnType("text");
+
+                entity.Property(e => e.FaceRepositoryName)
+                    .HasColumnName("face_repository_name")
+                    .HasColumnType("text");
+
+                entity.Property(e => e.FaceRepositoryComments)
+                    .HasColumnName("face_repository_comments")
+                    .HasColumnType("text");
             });
 
             modelBuilder.Entity<FaceRepositoryBusinessClient>(entity =>

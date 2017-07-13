@@ -79,6 +79,10 @@
       <HintPath>..\face_api_microsoft_console\packages\Microsoft.Extensions.Primitives.1.1.1\lib\netstandard1.0\Microsoft.Extensions.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\cyu.NTDWRHA\.nuget\packages\Newtonsoft.Json\10.0.2\lib\portable-net45+win8+wpa81+wp8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\face_api_microsoft_console\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
       <Private>True</Private>
@@ -128,6 +132,9 @@
     <Compile Include="ViewModels\BusinessClientDetailsViewModel.cs" />
     <Compile Include="ViewModels\BusinessClientViewModel.cs" />
     <Compile Include="ViewModels\business_client\repository\AddRepositoryViewModel.cs" />
+    <Compile Include="ViewModels\RepositoryItem.cs" />
+    <Compile Include="ViewModels\repository\ManageRepositoryViewModel.cs" />
+    <Compile Include="ViewModels\repository\CreateNewRepositoryViewModel.cs" />
     <Compile Include="ViewModels\business_client\repository\RepositoryViewModel.cs" />
     <Compile Include="ViewModels\business_client\users\UserViewModel.cs" />
     <Compile Include="ViewModels\Employee.cs" />
@@ -149,6 +156,9 @@
     <Compile Include="Views\business_client\repository\AddRepositoryPage.xaml.cs">
       <DependentUpon>AddRepositoryPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\repository\CreateNewRepository.xaml.cs">
+      <DependentUpon>CreateNewRepository.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\business_client\repository\RepositoryPage.xaml.cs">
       <DependentUpon>RepositoryPage.xaml</DependentUpon>
     </Compile>
@@ -164,6 +174,9 @@
     </Compile>
     <Compile Include="Views\MaterialDesignDemos.xaml.cs">
       <DependentUpon>MaterialDesignDemos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\repository\ManageRepositoryPage.xaml.cs">
+      <DependentUpon>ManageRepositoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TaskParallelLibraryView.xaml.cs">
       <DependentUpon>TaskParallelLibraryView.xaml</DependentUpon>
@@ -203,6 +216,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\repository\CreateNewRepository.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\business_client\repository\RepositoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -220,6 +237,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MaterialDesignDemos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\repository\ManageRepositoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

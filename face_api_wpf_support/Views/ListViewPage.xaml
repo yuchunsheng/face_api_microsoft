@@ -39,6 +39,7 @@
             <Button Content="Async Employee loading Demo" Click="async_load_employee_demo"   />
             <Button Content="Load Page Async" Click="async_load_page_demo"    />
             <Button Content="Load Business client Page" Click="load_business_client_page"     />
+            <Button Content="Manage Repository" Click="manage_repository_page"     />
         </StackPanel>
         
         <materialDesign:Card Grid.Row="1" Grid.Column="0" Padding="32" Margin="16">
