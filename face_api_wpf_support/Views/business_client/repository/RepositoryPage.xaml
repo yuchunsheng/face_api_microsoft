@@ -1,4 +1,4 @@
-﻿<Page x:Class="face_api_wpf_support.Views.business_client.repository.RepositoryPage"
+﻿<Page x:Name="repository_page" x:Class="face_api_wpf_support.Views.business_client.repository.RepositoryPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,6 +11,7 @@
       TextOptions.TextRenderingMode="Auto"        
       Background="{DynamicResource MaterialDesignPaper}"
       FontFamily="{DynamicResource MaterialDesignFont}"
+      xmlns:system="clr-namespace:System;assembly=mscorlib"
       xmlns:local="clr-namespace:face_api_wpf_support.Views.business_client.repository"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
@@ -22,63 +23,80 @@
         </Style>
     </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+    <materialDesign:DialogHost IsOpen="{Binding Dialog_open}" >
+        <materialDesign:DialogHost.DialogContent>
+            <StackPanel Orientation="Vertical" Background="#00b294">
+                <Label Content="Existing Repository"  />
+                <Label Content="Existing Repository"  />
+                <Label Content="Existing Repository"  />
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsCancel="True"
+                                        Margin="0 8 8 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                    <Button.CommandParameter>
+                        <system:Boolean>False</system:Boolean>
+                    </Button.CommandParameter>
+                    CANCEL
+                </Button>
+            </StackPanel>
+        </materialDesign:DialogHost.DialogContent>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
 
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="Auto"/>
 
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
-            <Button Content="Go Home" Command="{Binding go_home_command}" CommandParameter="{Binding Business_client_id}" />
-            <Button Content="Add Repository" Command="{Binding add_repository_command}" CommandParameter="{Binding Business_client_id}" />
-            <!--<Button Content="Users Manage" Command="{Binding goto_user_page_command}" CommandParameter="Binding item.id" />-->
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
+                <Button Content="Go Home" Command="{Binding go_home_command}" CommandParameter="{Binding Business_client_id}" />
+                <Button Content="Add Repository" Command="{Binding add_repository_command}" CommandParameter="{Binding Business_client_id}" />
+                <!--<Button Content="Users Manage" Command="{Binding goto_user_page_command}" CommandParameter="Binding item.id" />-->
 
-            <CheckBox IsChecked="{Binding next_page_checked}" Checked="next_page_checked" Visibility="Hidden" />
+                <CheckBox IsChecked="{Binding next_page_checked}" Checked="next_page_checked" Visibility="Hidden" />
 
-        </StackPanel>
+            </StackPanel>
 
-        <materialDesign:Card Grid.Row="1" Grid.Column="0" Margin="16" Height="600">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+            <materialDesign:Card Grid.Row="1" Grid.Column="0" Margin="16" Height="600">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
 
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80"/>
-                    <RowDefinition Height="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="Auto"/>
 
-                </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
-                    <Label Content="Existing Repository"  />
-                </StackPanel>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
+                        <Label Content="Existing Repository"  />
+                    </StackPanel>
 
-                <ListView x:Name="test_list" Grid.Row="1" Grid.Column="0"  ItemsSource="{Binding Reporitory_list}" ScrollViewer.CanContentScroll="True" 
+                    <ListView x:Name="test_list" Grid.Row="1" Grid.Column="0"  ItemsSource="{Binding Reporitory_list}" ScrollViewer.CanContentScroll="True" 
                         ScrollViewer.VerticalScrollBarVisibility="Visible"  HorizontalAlignment="Left" HorizontalContentAlignment="Left">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Existing Repository" Width="320" DisplayMemberBinding="{Binding Name}" />
-                            <GridViewColumn  HeaderContainerStyle="{StaticResource ListViewStyle}" Header="" Width="320">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="Delete"></Button>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            
-                            
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Existing Repository" Width="320" DisplayMemberBinding="{Binding repository_id}" />
+                                <GridViewColumn  HeaderContainerStyle="{StaticResource ListViewStyle}" Header="" Width="320">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="Delete" Command="{Binding DataContext.delete_repository_command,ElementName=repository_page}" CommandParameter="{Binding repository_id}"></Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
 
-                        </GridView>
+                            </GridView>
 
-                    </ListView.View>
-                </ListView>
+                        </ListView.View>
+                    </ListView>
 
-            </Grid>
-            
-        </materialDesign:Card>
+                </Grid>
 
-    </Grid>
+            </materialDesign:Card>
+        </Grid>
+
+    </materialDesign:DialogHost>
+    
 </Page>

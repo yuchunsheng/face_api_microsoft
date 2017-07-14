@@ -111,7 +111,7 @@ namespace face_api_wpf_support.ViewModels.repository
             get
             {
                 if (_deletee_face_repository_command == null)
-                    _deletee_face_repository_command = new RelayCommand(new Action<object>(deletee_face_repository));
+                    _deletee_face_repository_command = new RelayCommand(new Action<object>(delete_face_repository));
                 return _deletee_face_repository_command;
             }
             set
@@ -121,7 +121,7 @@ namespace face_api_wpf_support.ViewModels.repository
 
         }
 
-        private void deletee_face_repository(object obj)
+        private void delete_face_repository(object obj)
         {
             //delete the face repository
             Console.WriteLine((string)obj);
@@ -138,10 +138,23 @@ namespace face_api_wpf_support.ViewModels.repository
 
                         if (face_repository != null)
                         {
-                            context.FaceRepository.Remove((FaceRepository)face_repository);
-                            context.SaveChanges();
-                        }
+                            using (var dbContextTransaction = context.Database.BeginTransaction())
+                            {
+                                try
+                                {
+                                    context.FaceRepository.Remove((FaceRepository)face_repository);
+                                    context.SaveChanges();
+                                    dbContextTransaction.Commit();
 
+                                }
+                                catch (Exception)
+                                {
+                                    dbContextTransaction.Rollback();
+                                }
+
+                            }
+                            
+                        }
                     }
 
                 });

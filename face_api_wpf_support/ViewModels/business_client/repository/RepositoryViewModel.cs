@@ -2,6 +2,8 @@
 using face_api_commons.Model;
 using face_api_wpf_support.Views.business_client;
 using face_api_wpf_support.Views.business_client.repository;
+using Microsoft.ProjectOxford.Face;
+using Microsoft.ProjectOxford.Face.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +15,24 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
 {
     public class RepositoryViewModel: ObservableObject
     {
-        private List<String> _reporitory_list;
+        private bool _dialog_open;
+        public bool Dialog_open
+        {
+            get
+            {
+                return _dialog_open;
+            }
 
-        public List<string> Reporitory_list
+            set
+            {
+                _dialog_open = value;
+                RaisePropertyChangedEvent("Dialog_open");
+            }
+        }
+
+        private List<RepositoryItem> _reporitory_list;
+
+        public List<RepositoryItem> Reporitory_list
         {
             get
             {
@@ -103,6 +120,103 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
 
         }
 
+        RelayCommand _delete_repository_command;
+        public RelayCommand delete_repository_command
+        {
+            get
+            {
+                if (_delete_repository_command == null)
+                    _delete_repository_command = new RelayCommand(new Action<object>(delete_repository));
+                return _delete_repository_command;
+            }
+            set
+            {
+                _delete_repository_command = value;
+            }
+
+        }
+
+        private async void delete_repository(object obj)
+        {
+            string face_list_id = (string)obj;
+            //delete all faces in the face repository
+            //You can't delete a face repository with face in it.
+            
+            var faceServiceClient = new FaceServiceClient();
+            FaceList face_list = null;
+            bool face_api_error = false;
+            try
+            {
+                face_list = await faceServiceClient.GetFaceListAsync(face_list_id);
+            }
+            catch(FaceAPIException ex)
+            {
+                face_api_error = true;
+                Console.WriteLine(ex.ErrorMessage);
+            }
+
+            
+            if (face_api_error || 
+                (face_list != null && face_list.PersistedFaces != null && face_list.PersistedFaces.Count() > 0))
+            {
+                Dialog_open = true;
+            }
+            else
+            {
+                //remove relationship between business cline and the face repository
+                //make the face repository avaliable
+                Task retiring_face_repository_task = Task.Factory.StartNew(
+                () =>
+                {
+                    using (var context = new DemoContext())
+                    {
+                        var business_face_repository = (from re_bu in context.FaceRepositoryBusinessClient
+                                                        join re in context.FaceRepository on re_bu.FaceReposityId equals re.Id
+                                                        where re.FaceRepositoryId.Equals(face_list_id)
+                                                        select re_bu).Take(1);
+                        var face_repository = context.FaceRepository.FirstOrDefault(i => i.FaceRepositoryId == face_list_id);
+                        face_repository.Availiable = 1;
+
+                        if (business_face_repository != null)
+                        {
+                            using (var dbContextTransaction = context.Database.BeginTransaction())
+                            {
+                                try
+                                {
+                                    context.FaceRepositoryBusinessClient.Remove((FaceRepositoryBusinessClient)business_face_repository);
+                                    context.FaceRepository.Update(face_repository);
+                                    context.SaveChanges();
+                                    dbContextTransaction.Commit();
+
+                                }
+                                catch (Exception)
+                                {
+                                    dbContextTransaction.Rollback();
+                                }
+
+                            }
+
+                        }
+                    }
+
+                });
+
+                retiring_face_repository_task.Wait();
+
+                RepositoryPage repository_page = new RepositoryPage();
+                repository_page.load_item(Business_client_id);
+                next_page = repository_page;
+                next_page_checked = true;
+            }
+            
+
+            
+
+            
+
+        }
+
+
         private int _business_client_id = 0;
         public int Business_client_id
         {
@@ -121,7 +235,7 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
 
         public RepositoryViewModel()
         {
-            
+            Dialog_open = false;
         }
 
         public void init(object id)
@@ -130,10 +244,10 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
 
             if (Business_client_id != 0)
             {
-                Task<List<string>> get_repository_task = Task<List<string>>.Factory.StartNew(
+                Task<List<RepositoryItem>> get_repository_task = Task<List<RepositoryItem>>.Factory.StartNew(
                 () =>
                 {
-                    List<string> result = new List<string>();
+                    List<RepositoryItem> result = new List<RepositoryItem>();
                     using (var context = new DemoContext())
                     {
                         var query =
@@ -144,7 +258,10 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
 
                         foreach (var repository in query)
                         {
-                            result.Add((string)repository.FaceRepositoryId);
+                            result.Add(new RepositoryItem((repository.Id).ToString(), 
+                                repository.FaceRepositoryId, 
+                                repository.FaceRepositoryName, 
+                                repository.FaceRepositoryComments));
                         }
                     }
 

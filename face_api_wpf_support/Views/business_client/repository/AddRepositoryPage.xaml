@@ -1,4 +1,4 @@
-﻿<Page x:Class="face_api_wpf_support.Views.business_client.repository.AddRepositoryPage"
+﻿<Page x:Name="add_repository_page" x:Class="face_api_wpf_support.Views.business_client.repository.AddRepositoryPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -34,7 +34,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
             <Button Content="Back" Command="{Binding go_back_command}" CommandParameter="{Binding Business_client_id}"  />
-            <Button Content="Add new" Command="{Binding create_face_repository_command}" CommandParameter="{Binding Business_client_id}" />
+            <!--<Button Content="Add new" Command="{Binding create_face_repository_command}" CommandParameter="{Binding Business_client_id}" />-->
 
             <CheckBox IsChecked="{Binding next_page_checked}" Checked="next_page_checked" Visibility="Hidden" />
 
@@ -45,13 +45,12 @@
           ScrollViewer.VerticalScrollBarVisibility="Visible"  HorizontalAlignment="Left" HorizontalContentAlignment="Left">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Name" Width="320" DisplayMemberBinding="{Binding}" />
+                        <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Name" Width="320" DisplayMemberBinding="{Binding repository_id}" />
                         <GridViewColumn  HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Details" Width="320">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <!--<Button Content="Add" Command="{Binding DataContext.show_details_command, ElementName=myWindow}" CommandParameter="{Binding Id}"  />-->
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Content="Add" />
+                                        <Button Content="Add" Command="{Binding DataContext.add_repository_command, ElementName=add_repository_page}" CommandParameter="{Binding Id}"  />
                                     </StackPanel>
                                     
                                 </DataTemplate>

@@ -12,8 +12,8 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
 {
     public class AddRepositoryViewModel: ObservableObject
     {
-        private List<string> _availiable_repository;
-        public List<string> Availiable_repository
+        private List<RepositoryItem> _availiable_repository;
+        public List<RepositoryItem> Availiable_repository
         {
             get
             {
@@ -104,33 +104,33 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
 
         }
 
-
-        RelayCommand _create_face_repository_command;
-        public RelayCommand create_face_repository_command
+        RelayCommand _add_repository_command;
+        public RelayCommand add_repository_command
         {
             get
             {
-                if (_create_face_repository_command == null)
-                    _create_face_repository_command = new RelayCommand(new Action<object>(create_face_repository));
-                return _create_face_repository_command;
+                if (_add_repository_command == null)
+                    _add_repository_command = new RelayCommand(new Action<object>(add_repository));
+                return _add_repository_command;
             }
             set
             {
-                _create_face_repository_command = value;
+                _add_repository_command = value;
             }
 
         }
 
-        private void create_face_repository(object obj)
+        private void add_repository(object obj)
         {
+            
+            save_repository_business_client(Business_client_id, Convert.ToInt64(obj));
 
-            CreateNewRepository new_repository_page = new CreateNewRepository();
-            Console.WriteLine(obj.ToString());
-            new_repository_page.load_item();
-            next_page = new_repository_page;
+            RepositoryPage repository_page = new RepositoryPage();
+            repository_page.load_item(Business_client_id);
+            next_page = repository_page;
             next_page_checked = true;
+
         }
-        
 
         public AddRepositoryViewModel()
         {
@@ -145,10 +145,10 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
 
         public void load_avaliable_repository()
         {
-            Task<List<string>> get_repository_task = Task<List<string>>.Factory.StartNew(
+            List<RepositoryItem> result = new List<RepositoryItem>();
+            Task<List<RepositoryItem>> get_repository_task = Task<List<RepositoryItem>>.Factory.StartNew(
                 () =>
                 {
-                    List<string> result = new List<string>();
                     using (var context = new DemoContext())
                     {
                         var query =
@@ -158,7 +158,13 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
 
                         foreach (var repository in query)
                         {
-                            result.Add((string)repository.FaceRepositoryId);
+                            RepositoryItem face_repository = new RepositoryItem();
+                            face_repository.Id = (repository.Id).ToString();
+                            face_repository.repository_id = repository.FaceRepositoryId;
+                            face_repository.repository_name = repository.FaceRepositoryName;
+                            face_repository.repository_comment = repository.FaceRepositoryComments;
+
+                            result.Add(face_repository);
                         }
                     }
 
@@ -169,6 +175,38 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
             get_repository_task.Wait();
 
             Availiable_repository = get_repository_task.Result;
+        }
+
+        private void save_repository_business_client(int business_client_id, long repository_id)
+        {
+            Task save_repository_task = Task.Factory.StartNew(
+                () =>
+                {
+                    using (var context = new DemoContext())
+                    {
+                        var repository = context.FaceRepository.Where(rep => rep.Id == repository_id).FirstOrDefault();
+
+                        if(repository != null)
+                        {
+                            repository.Availiable = 0;
+
+                            FaceRepositoryBusinessClient repository_business_clinet = new FaceRepositoryBusinessClient();
+                            repository_business_clinet.BusinessClientId = Business_client_id;
+                            repository_business_clinet.FaceReposityId = repository_id;
+
+                            context.FaceRepositoryBusinessClient.Add(repository_business_clinet);
+
+
+                            context.SaveChanges();
+
+                        }
+                        
+
+                    }
+
+                });
+
+            save_repository_task.Wait();
         }
 
 
