@@ -145,15 +145,15 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
             var faceServiceClient = new FaceServiceClient();
             FaceList face_list = null;
             bool face_api_error = false;
-            try
-            {
-                face_list = await faceServiceClient.GetFaceListAsync(face_list_id);
-            }
-            catch(FaceAPIException ex)
-            {
-                face_api_error = true;
-                Console.WriteLine(ex.ErrorMessage);
-            }
+            //try
+            //{
+            //    face_list = await faceServiceClient.GetFaceListAsync(face_list_id);
+            //}
+            //catch(FaceAPIException ex)
+            //{
+            //    face_api_error = true;
+            //    Console.WriteLine(ex.ErrorMessage);
+            //}
 
             
             if (face_api_error || 
@@ -173,11 +173,11 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
                         var business_face_repository = (from re_bu in context.FaceRepositoryBusinessClient
                                                         join re in context.FaceRepository on re_bu.FaceReposityId equals re.Id
                                                         where re.FaceRepositoryId.Equals(face_list_id)
-                                                        select re_bu).Take(1);
+                                                        select re_bu).FirstOrDefault();
                         var face_repository = context.FaceRepository.FirstOrDefault(i => i.FaceRepositoryId == face_list_id);
                         face_repository.Availiable = 1;
 
-                        if (business_face_repository != null)
+                        if (business_face_repository != null && face_repository !=null)
                         {
                             using (var dbContextTransaction = context.Database.BeginTransaction())
                             {
@@ -189,7 +189,7 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
                                     dbContextTransaction.Commit();
 
                                 }
-                                catch (Exception)
+                                catch (Exception e)
                                 {
                                     dbContextTransaction.Rollback();
                                 }
@@ -208,11 +208,6 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
                 next_page = repository_page;
                 next_page_checked = true;
             }
-            
-
-            
-
-            
 
         }
 
