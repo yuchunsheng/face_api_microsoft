@@ -176,6 +176,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\AnonymousIdentity.cs" />
+    <Compile Include="Authentication\AuthenticationService.cs" />
+    <Compile Include="Authentication\CustomIdentity.cs" />
+    <Compile Include="Authentication\CustomPrincipal.cs" />
+    <Compile Include="Authentication\User_auth.cs" />
     <Compile Include="Common\ObservableCollectionObject.cs" />
     <Compile Include="Common\ObservableObject.cs" />
     <Compile Include="Model\BusinessClient.cs" />

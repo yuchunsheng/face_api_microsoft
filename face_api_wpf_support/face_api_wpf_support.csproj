@@ -156,6 +156,9 @@
     <Compile Include="Views\business_client\repository\AddRepositoryPage.xaml.cs">
       <DependentUpon>AddRepositoryPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\repository\CreateNewRepository.xaml.cs">
       <DependentUpon>CreateNewRepository.xaml</DependentUpon>
     </Compile>
@@ -215,6 +218,10 @@
     <Page Include="Views\business_client\repository\AddRepositoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\repository\CreateNewRepository.xaml">
       <SubType>Designer</SubType>

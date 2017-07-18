@@ -2,6 +2,7 @@
 using MaterialDesignThemes.Wpf;
 using System;
 using System.ComponentModel;
+using System.Security.Permissions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ namespace face_api_wpf_support.Views
     /// <summary>
     /// Interaction logic for BusinessClientPage.xaml
     /// </summary>
+    [PrincipalPermission(SecurityAction.Demand, Role = "Administrators")]
     public partial class BusinessClientPage : Page
     {
         private BusinessClientViewModel business_client_viewmodel ;

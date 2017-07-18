@@ -24,8 +24,8 @@ namespace face_api_wpf_support
         public MainWindow()
         {
             InitializeComponent();
-            ListViewPage first_page = new ListViewPage();
-            first_page.Load_business_client();
+            LoginPage first_page = new LoginPage();
+            //first_page.Load_business_client();
 
             main_frame.NavigationService.Navigate(first_page);
         }

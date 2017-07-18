@@ -2,6 +2,7 @@
 using face_api_wpf_support.Views.repository;
 using System;
 using System.ComponentModel;
+using System.Security.Permissions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ namespace face_api_wpf_support.Views
     /// <summary>
     /// Interaction logic for ListViewPage.xaml
     /// </summary>
+    [PrincipalPermission(SecurityAction.Demand)]
     public partial class ListViewPage : Page
     {
         private ListViewModel list_view_model;

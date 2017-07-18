@@ -81,6 +81,10 @@ namespace face_api_commons.Model
                 entity.Property(e => e.UserName)
                     .IsRequired()
                     .HasColumnName("user_name");
+
+                entity.Property(e => e.Roles)
+                    .HasColumnName("roles")
+                    .HasColumnType("text");
             });
 
             modelBuilder.Entity<UserBusinessClient>(entity =>
