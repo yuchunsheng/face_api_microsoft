@@ -109,6 +109,7 @@
       <HintPath>..\face_api_microsoft_console\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -132,6 +133,7 @@
     <Compile Include="ViewModels\BusinessClientDetailsViewModel.cs" />
     <Compile Include="ViewModels\BusinessClientViewModel.cs" />
     <Compile Include="ViewModels\business_client\repository\AddRepositoryViewModel.cs" />
+    <Compile Include="ViewModels\business_face_photo\UploadBusinessFacePhotoViewModel.cs" />
     <Compile Include="ViewModels\RepositoryItem.cs" />
     <Compile Include="ViewModels\repository\ManageRepositoryViewModel.cs" />
     <Compile Include="ViewModels\repository\CreateNewRepositoryViewModel.cs" />
@@ -155,6 +157,9 @@
     </Compile>
     <Compile Include="Views\business_client\repository\AddRepositoryPage.xaml.cs">
       <DependentUpon>AddRepositoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\business_face_photo\UploadFacePhotoPage.xaml.cs">
+      <DependentUpon>UploadFacePhotoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -216,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\business_client\repository\AddRepositoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\business_face_photo\UploadFacePhotoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

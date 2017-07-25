@@ -121,13 +121,14 @@ namespace face_api_wpf_support.ViewModels.repository
 
         }
 
-        private void delete_face_repository(object obj)
+        private async void delete_face_repository(object obj)
         {
             //delete the face repository
             Console.WriteLine((string)obj);
             string face_list_id = (string)obj;
             var faceServiceClient = new FaceServiceClient();
-            //await faceServiceClient.DeleteFaceListAsync(face_list_id);
+
+            await faceServiceClient.DeleteFaceListAsync(face_list_id);
 
             Task delete_face_repository_task = Task.Factory.StartNew(
                 () =>

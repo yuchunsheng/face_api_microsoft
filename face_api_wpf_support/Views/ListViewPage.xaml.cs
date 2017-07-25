@@ -1,4 +1,5 @@
 ﻿using face_api_wpf_support.ViewModels;
+using face_api_wpf_support.Views.business_face_photo;
 using face_api_wpf_support.Views.repository;
 using System;
 using System.ComponentModel;
@@ -90,6 +91,13 @@ namespace face_api_wpf_support.Views
             ManageRepositoryPage mange_repository_page = new ManageRepositoryPage();
             mange_repository_page.load_item();
             this.NavigationService.Navigate(mange_repository_page);
+        }
+
+        private void upload_face_photo(object sender, RoutedEventArgs e)
+        {
+            UploadFacePhotoPage upload_face_photo_page = new UploadFacePhotoPage();
+            upload_face_photo_page.load_item();
+            this.NavigationService.Navigate(upload_face_photo_page);
         }
     }
 }

@@ -138,7 +138,7 @@ namespace face_api_wpf_support.ViewModels.business_client.repository
                 string face_list_id = Guid.NewGuid().ToString();
                 var faceServiceClient = new FaceServiceClient();
 
-                //await faceServiceClient.CreateFaceListAsync(face_list_id, repository_name, repository_comment);
+                await faceServiceClient.CreateFaceListAsync(face_list_id, repository_name, repository_comment);
 
                 //save the face_list_name, face_list_id and comments in the database
                 Task add_face_repository_task = Task.Factory.StartNew(

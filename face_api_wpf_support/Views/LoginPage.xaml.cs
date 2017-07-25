@@ -50,7 +50,7 @@ namespace face_api_wpf_support.Views
             
             if (Thread.CurrentPrincipal.Identity.IsAuthenticated)
             {
-                MessageBox.Show("Login successful");
+                //MessageBox.Show("Login successful");
                 ListViewPage first_page = new ListViewPage();
                 first_page.Load_business_client();
                 NavigationService.Navigate(first_page);
