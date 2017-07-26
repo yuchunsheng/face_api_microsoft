@@ -131,17 +131,19 @@ namespace face_api_wpf_support.ViewModels.business_face_photo
                 persistedFaceId = result.PersistedFaceId;
             }
 
+            string photolocation ="";  //file name
 
-            //Guid photoID = System.Guid.NewGuid();
-            string photolocation = "e:\\temp\\temp\\" + persistedFaceId.ToString() + ".jpg";  //file name    
-
-            using (FileStream filestream = new FileStream(photolocation, FileMode.Create))
+            if (persistedFaceId != Guid.Empty)
             {
-                BitmapImage image;
-                image = new BitmapImage(new Uri(imageFilePath));
-                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(image));
-                encoder.Save(filestream);
+                photolocation = "e:\\temp\\temp\\" + persistedFaceId.ToString() + ".jpg";  //file name
+                using (FileStream filestream = new FileStream(photolocation, FileMode.Create))
+                {
+                    BitmapImage image;
+                    image = new BitmapImage(new Uri(imageFilePath));
+                    JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(image));
+                    encoder.Save(filestream);
+                }
             }
 
         }
@@ -191,7 +193,7 @@ namespace face_api_wpf_support.ViewModels.business_face_photo
 
         public void init()
         {
-            Photo_path = "e:\\temp\\87cbf080-74e1-11e3-a623-7054d21a8f10.jpg";
+            Photo_path = "/face_api_wpf_support;component/Images/ca1bb2bfd36cce6c4a89a8dc4548a22a.jpg";
         }
 
     }

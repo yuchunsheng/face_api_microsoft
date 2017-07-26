@@ -321,6 +321,9 @@
   <ItemGroup>
     <Resource Include="Page_base_code.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ca1bb2bfd36cce6c4a89a8dc4548a22a.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
