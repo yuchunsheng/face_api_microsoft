@@ -7,6 +7,8 @@ namespace face_api_commons.Model
     public partial class DemoContext : DbContext
     {
         public virtual DbSet<BusinessClient> BusinessClient { get; set; }
+        public virtual DbSet<FaceDocRepository> FaceDocRepository { get; set; }
+        public virtual DbSet<FaceDocs> FaceDocs { get; set; }
         public virtual DbSet<FacePhotoPath> FacePhotoPath { get; set; }
         public virtual DbSet<FaceRepository> FaceRepository { get; set; }
         public virtual DbSet<FaceRepositoryBusinessClient> FaceRepositoryBusinessClient { get; set; }
@@ -15,7 +17,7 @@ namespace face_api_commons.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+            //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
             optionsBuilder.UseSqlite(@"data source=E:\temp\face_api_microsoft\face_api_wpf\demo.db");
         }
 
@@ -28,6 +30,32 @@ namespace face_api_commons.Model
                 entity.Property(e => e.ClientName)
                     .IsRequired()
                     .HasColumnName("client_name");
+            });
+
+            modelBuilder.Entity<FaceDocRepository>(entity =>
+            {
+                entity.ToTable("face_doc_repository");
+
+                entity.Property(e => e.FaceDocId)
+                    .IsRequired()
+                    .HasColumnName("face_doc_id");
+
+                entity.Property(e => e.FaceRepositoryId)
+                    .IsRequired()
+                    .HasColumnName("face_repository_id");
+            });
+
+            modelBuilder.Entity<FaceDocs>(entity =>
+            {
+                entity.ToTable("face_docs");
+
+                entity.Property(e => e.FaceDocId)
+                    .IsRequired()
+                    .HasColumnName("face_doc_id");
+
+                entity.Property(e => e.UserData)
+                    .IsRequired()
+                    .HasColumnName("user_data");
             });
 
             modelBuilder.Entity<FacePhotoPath>(entity =>
@@ -45,7 +73,11 @@ namespace face_api_commons.Model
 
                 entity.Property(e => e.Availiable)
                     .HasColumnName("availiable")
-                    .HasColumnType("integer");
+                    .HasColumnType("bigint");
+
+                entity.Property(e => e.FaceRepositoryComments)
+                    .HasColumnName("face_repository_comments")
+                    .HasColumnType("text");
 
                 entity.Property(e => e.FaceRepositoryId)
                     .IsRequired()
@@ -54,10 +86,6 @@ namespace face_api_commons.Model
 
                 entity.Property(e => e.FaceRepositoryName)
                     .HasColumnName("face_repository_name")
-                    .HasColumnType("text");
-
-                entity.Property(e => e.FaceRepositoryComments)
-                    .HasColumnName("face_repository_comments")
                     .HasColumnType("text");
             });
 
@@ -76,14 +104,16 @@ namespace face_api_commons.Model
 
                 entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasColumnName("password");
-
-                entity.Property(e => e.UserName)
-                    .IsRequired()
-                    .HasColumnName("user_name");
+                    .HasColumnName("password")
+                    .HasColumnType("text");
 
                 entity.Property(e => e.Roles)
                     .HasColumnName("roles")
+                    .HasColumnType("text");
+
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasColumnName("user_name")
                     .HasColumnType("text");
             });
 

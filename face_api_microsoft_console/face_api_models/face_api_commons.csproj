@@ -185,6 +185,8 @@
     <Compile Include="Common\ObservableObject.cs" />
     <Compile Include="Model\BusinessClient.cs" />
     <Compile Include="Model\DemoContext.cs" />
+    <Compile Include="Model\FaceDocRepository.cs" />
+    <Compile Include="Model\FaceDocs.cs" />
     <Compile Include="Model\FacePhotoPath.cs" />
     <Compile Include="Model\FaceRepository.cs" />
     <Compile Include="Model\FaceRepositoryBusinessClient.cs" />

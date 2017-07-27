@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 
-namespace face_api_wpf_support.ViewModels.business_face_photo
+namespace face_api_wpf_support.ViewModels.business_face_library
 {
     public class UploadBusinessFacePhotoViewModel: ObservableObject
     {

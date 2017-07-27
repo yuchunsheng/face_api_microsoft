@@ -133,7 +133,9 @@
     <Compile Include="ViewModels\BusinessClientDetailsViewModel.cs" />
     <Compile Include="ViewModels\BusinessClientViewModel.cs" />
     <Compile Include="ViewModels\business_client\repository\AddRepositoryViewModel.cs" />
-    <Compile Include="ViewModels\business_face_photo\UploadBusinessFacePhotoViewModel.cs" />
+    <Compile Include="ViewModels\business_face_library\BusinessFaceLibraryViewModel.cs" />
+    <Compile Include="ViewModels\business_face_library\UploadBusinessFacePhotoViewModel.cs" />
+    <Compile Include="ViewModels\FaceDocItem.cs" />
     <Compile Include="ViewModels\RepositoryItem.cs" />
     <Compile Include="ViewModels\repository\ManageRepositoryViewModel.cs" />
     <Compile Include="ViewModels\repository\CreateNewRepositoryViewModel.cs" />
@@ -158,7 +160,10 @@
     <Compile Include="Views\business_client\repository\AddRepositoryPage.xaml.cs">
       <DependentUpon>AddRepositoryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\business_face_photo\UploadFacePhotoPage.xaml.cs">
+    <Compile Include="Views\business_face_library\BusinessFaceLibraryPage.xaml.cs">
+      <DependentUpon>BusinessFaceLibraryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\business_face_library\UploadFacePhotoPage.xaml.cs">
       <DependentUpon>UploadFacePhotoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
@@ -224,7 +229,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\business_face_photo\UploadFacePhotoPage.xaml">
+    <Page Include="Views\business_face_library\BusinessFaceLibraryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\business_face_library\UploadFacePhotoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
