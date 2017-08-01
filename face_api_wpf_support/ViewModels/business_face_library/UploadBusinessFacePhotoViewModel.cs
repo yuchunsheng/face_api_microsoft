@@ -1,9 +1,12 @@
 ﻿using face_api_commons.Common;
+using face_api_commons.Model;
 using face_api_wpf_support.Views;
+using face_api_wpf_support.Views.business_face_library;
 using Microsoft.ProjectOxford.Face;
 using Microsoft.ProjectOxford.Face.Contract;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -102,19 +105,25 @@ namespace face_api_wpf_support.ViewModels.business_face_library
         private async void upload_face_photo(object obj)
         {
             string imageFilePath = Photo_path.ToString();
+
+            FaceRectangle face_area;
             
             using (var fileStream = File.OpenRead(imageFilePath))
             {
                 using (var faceServiceClient = new FaceServiceClient())
                 {
                     Microsoft.ProjectOxford.Face.Contract.Face[] faces = await faceServiceClient.DetectAsync(
-                        fileStream, false, true,
-                        new FaceAttributeType[] { FaceAttributeType.Gender, FaceAttributeType.Age, FaceAttributeType.Smile, FaceAttributeType.Glasses });
+                        fileStream, false, true, null);
 
-                    if (faces.Length != 1)
+                    //new FaceAttributeType[] { FaceAttributeType.Gender, FaceAttributeType.Age, FaceAttributeType.Smile, FaceAttributeType.Glasses });
+
+                    if (faces.Length == 0)
                     {
                         System.Windows.MessageBox.Show("No face in the photo");
                         return;
+                    }else
+                    {
+                        face_area = faces[0].FaceRectangle;
                     }
             
                 }
@@ -122,12 +131,14 @@ namespace face_api_wpf_support.ViewModels.business_face_library
             }
 
             Guid persistedFaceId;
+            string faceListId = "d7896b8a-92ba-4808-b335-c6634c309a74";
+
             //save the face to the face list
             using (var faceServiceClient = new FaceServiceClient())
             {
-                string faceListId = "d7896b8a-92ba-4808-b335-c6634c309a74";
+                //string faceListId = "d7896b8a-92ba-4808-b335-c6634c309a74";
                 Stream imageStream = File.OpenRead(imageFilePath);
-                AddPersistedFaceResult result =  await faceServiceClient.AddFaceToFaceListAsync(faceListId, imageStream, imageFilePath);
+                AddPersistedFaceResult result =  await faceServiceClient.AddFaceToFaceListAsync(faceListId, imageStream, imageFilePath, face_area);
                 persistedFaceId = result.PersistedFaceId;
             }
 
@@ -145,6 +156,54 @@ namespace face_api_wpf_support.ViewModels.business_face_library
                     encoder.Save(filestream);
                 }
             }
+
+            //save the face in the database
+            Task add_face_task = Task.Factory.StartNew(
+            () =>
+            {
+                using (var context = new DemoContext())
+                {
+                    
+                    
+                    using (var dbContextTransaction = context.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            // Perform data access using the context 
+                            FaceDocs face_doc = new FaceDocs();
+                            face_doc.FaceDocId = persistedFaceId.ToString();
+                            face_doc.UserData = "e:\\temp\\temp\\";
+                            context.FaceDocs.Add(face_doc);
+
+                            FaceDocRepository face_doc_repository = new FaceDocRepository();
+                            face_doc_repository.FaceDocId = persistedFaceId.ToString();
+                            face_doc_repository.FaceRepositoryId = faceListId;
+
+                            context.FaceDocRepository.Add(face_doc_repository);
+
+                            context.SaveChanges();
+                            dbContextTransaction.Commit();
+
+                        }
+                        catch (Exception e)
+                        {
+                            dbContextTransaction.Rollback();
+                        }
+
+                    }
+
+                    
+
+                }
+
+            });
+
+            add_face_task.Wait();
+
+            BusinessFaceLibraryPage face_list_page = new BusinessFaceLibraryPage();
+            face_list_page.load_item();
+            next_page = face_list_page;
+            next_page_checked = true;
 
         }
 

@@ -1,6 +1,7 @@
 ﻿using face_api_commons.Common;
 using face_api_commons.Model;
 using face_api_wpf_support.Views;
+using face_api_wpf_support.Views.business_face_library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,57 @@ namespace face_api_wpf_support.ViewModels.business_face_library
         {
             ListViewPage list_view_page = new ListViewPage();
             next_page = list_view_page;
+            next_page_checked = true;
+
+        }
+
+        RelayCommand _add_face_command;
+        public RelayCommand add_face_command
+        {
+            get
+            {
+                if (_add_face_command == null)
+                    _add_face_command = new RelayCommand(new Action<object>(add_face));
+                return _add_face_command;
+            }
+            set
+            {
+                _add_face_command = value;
+            }
+
+        }
+
+        private void add_face(object obj)
+        {
+            UploadFacePhotoPage upload_face_photo_page = new UploadFacePhotoPage();
+            next_page = upload_face_photo_page;
+            next_page_checked = true;
+
+        }
+
+
+        RelayCommand _delete_face_command;
+        public RelayCommand delete_face_command
+        {
+            get
+            {
+                if (_delete_face_command == null)
+                    _delete_face_command = new RelayCommand(new Action<object>(delete_face));
+                return _go_back_command;
+            }
+            set
+            {
+                _delete_face_command = value;
+            }
+
+        }
+
+        private void delete_face(object obj)
+        {
+
+
+            BusinessFaceLibraryPage business_face_library_page = new BusinessFaceLibraryPage();
+            next_page = business_face_library_page;
             next_page_checked = true;
 
         }
