@@ -135,6 +135,9 @@
     <Compile Include="ViewModels\business_client\repository\AddRepositoryViewModel.cs" />
     <Compile Include="ViewModels\business_face_library\BusinessFaceLibraryViewModel.cs" />
     <Compile Include="ViewModels\business_face_library\UploadBusinessFacePhotoViewModel.cs" />
+    <Compile Include="ViewModels\business_face_search\BusinessFaceSearchDetailViewModel.cs" />
+    <Compile Include="ViewModels\business_face_search\BusinessFaceSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\business_face_search\BusinessFaceSearchViewModel.cs" />
     <Compile Include="ViewModels\FaceDocItem.cs" />
     <Compile Include="ViewModels\RepositoryItem.cs" />
     <Compile Include="ViewModels\repository\ManageRepositoryViewModel.cs" />
@@ -145,6 +148,7 @@
     <Compile Include="ViewModels\Item.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\AddItemPageFunction.xaml.cs">
       <DependentUpon>AddItemPageFunction.xaml</DependentUpon>
     </Compile>
@@ -165,6 +169,15 @@
     </Compile>
     <Compile Include="Views\business_face_library\UploadFacePhotoPage.xaml.cs">
       <DependentUpon>UploadFacePhotoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\business_face_search\BusinessFaceSearchDetailPage.xaml.cs">
+      <DependentUpon>BusinessFaceSearchDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\business_face_search\BusinessFaceSearchPage.xaml.cs">
+      <DependentUpon>BusinessFaceSearchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\business_face_search\BusinessFaceSearchResultPage.xaml.cs">
+      <DependentUpon>BusinessFaceSearchResultPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -234,6 +247,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\business_face_library\UploadFacePhotoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\business_face_search\BusinessFaceSearchDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\business_face_search\BusinessFaceSearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\business_face_search\BusinessFaceSearchResultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

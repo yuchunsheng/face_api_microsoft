@@ -1,5 +1,6 @@
 ﻿using face_api_wpf_support.ViewModels;
 using face_api_wpf_support.Views.business_face_library;
+using face_api_wpf_support.Views.business_face_search;
 using face_api_wpf_support.Views.repository;
 using System;
 using System.ComponentModel;
@@ -98,6 +99,13 @@ namespace face_api_wpf_support.Views
             BusinessFaceLibraryPage upload_face_photo_page = new BusinessFaceLibraryPage();
             upload_face_photo_page.load_item();
             this.NavigationService.Navigate(upload_face_photo_page);
+        }
+
+        private void search_face_doc(object sender, RoutedEventArgs e)
+        {
+            BusinessFaceSearchPage face_search_page = new BusinessFaceSearchPage();
+            //face_search_page.load_item();
+            this.NavigationService.Navigate(face_search_page);
         }
     }
 }

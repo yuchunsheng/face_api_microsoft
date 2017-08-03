@@ -32,15 +32,24 @@
             <RowDefinition Height="Auto"/>
             
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#00b294">
-            <Button Content="Add New" Click="add_button_click" />
-            <Button Content="Material Design Demo" Click="start_material_design_demo" />
-            <Button Content="Task Parallel Library Demo" Click="start_task_parallel_library_demo"  />
-            <Button Content="Async Employee loading Demo" Click="async_load_employee_demo"   />
-            <Button Content="Load Page Async" Click="async_load_page_demo"    />
-            <Button Content="Load Business client Page" Click="load_business_client_page"     />
-            <Button Content="Manage Repository" Click="manage_repository_page"     />
-            <Button Content="Upload face photo" Click="upload_face_photo"     />
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" Background="#00b294">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Add New" Click="add_button_click" />
+                <Button Content="Material Design Demo" Click="start_material_design_demo" />
+                <Button Content="Task Parallel Library Demo" Click="start_task_parallel_library_demo"  />
+                <Button Content="Async Employee loading Demo" Click="async_load_employee_demo"   />
+                <Button Content="Load Page Async" Click="async_load_page_demo"    />
+                
+                
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Load Business client Page" Click="load_business_client_page"     />
+                <Button Content="Manage Repository" Click="manage_repository_page"     />
+                <Button Content="Upload face photo" Click="upload_face_photo"     />
+                <Button Content="Search doc" Click="search_face_doc"     />
+                
+            </StackPanel>
+            
         </StackPanel>
         
         <materialDesign:Card Grid.Row="1" Grid.Column="0" Padding="32" Margin="16">

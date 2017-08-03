@@ -2,6 +2,7 @@
 using face_api_commons.Model;
 using face_api_wpf_support.Views;
 using face_api_wpf_support.Views.business_face_library;
+using Microsoft.ProjectOxford.Face;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,21 @@ namespace face_api_wpf_support.ViewModels.business_face_library
             set
             {
                 _next_page = value;
+            }
+        }
+
+        private bool _dialog_open;
+        public bool Dialog_open
+        {
+            get
+            {
+                return _dialog_open;
+            }
+
+            set
+            {
+                _dialog_open = value;
+                RaisePropertyChangedEvent("Dialog_open");
             }
         }
 
@@ -95,7 +111,7 @@ namespace face_api_wpf_support.ViewModels.business_face_library
             {
                 if (_delete_face_command == null)
                     _delete_face_command = new RelayCommand(new Action<object>(delete_face));
-                return _go_back_command;
+                return _delete_face_command;
             }
             set
             {
@@ -104,11 +120,86 @@ namespace face_api_wpf_support.ViewModels.business_face_library
 
         }
 
-        private void delete_face(object obj)
+        private async void delete_face(object obj)
         {
+            Console.WriteLine((string)obj);
+            string face_doc_id = obj.ToString();
+            bool face_api_error = false;
+            FaceDocs face_doc = null;
+            FaceDocRepository face_doc_repository = null;
+
+            Task get_face_doc_task = Task.Factory.StartNew(
+                () =>
+                {
+                    using (var context = new DemoContext())
+                    {
+                        face_doc = (from fd in context.FaceDocs
+                                        where fd.FaceDocId.Equals(face_doc_id)
+                                        select fd).FirstOrDefault();
+
+                        face_doc_repository = (from fdr in context.FaceDocRepository
+                                                   where fdr.FaceDocId.Equals(face_doc_id)
+                                                   select fdr).FirstOrDefault();
+                    }
+                });
+
+            get_face_doc_task.Wait();
+
+            var faceServiceClient = new FaceServiceClient();
+
+            try
+            {
+                Guid persistedFaceId = new Guid(face_doc_id);
+                await faceServiceClient.DeleteFaceFromFaceListAsync(face_doc_repository.FaceRepositoryId, persistedFaceId);
+            }
+            catch (FaceAPIException ex)
+            {
+                face_api_error = true;
+                Console.WriteLine(ex.ErrorMessage);
+            }
+
+
+            if (face_api_error)
+            {
+                Dialog_open = true;
+            }
+            else
+            {
+
+                Task remove_face_doc_task = Task.Factory.StartNew(
+                () =>
+                {
+                    using (var context = new DemoContext())
+                    {
+                        if (face_doc != null && face_doc_repository != null)
+                        {
+                            using (var dbContextTransaction = context.Database.BeginTransaction())
+                            {
+                                try
+                                {
+                                    context.FaceDocs.Remove(face_doc);
+                                    context.FaceDocRepository.Remove(face_doc_repository);
+                                    context.SaveChanges();
+                                    dbContextTransaction.Commit();
+
+                                }
+                                catch (Exception e)
+                                {
+                                    dbContextTransaction.Rollback();
+                                }
+
+                            }
+
+                        }
+                    }
+
+                });
+                remove_face_doc_task.Wait();
+            }
 
 
             BusinessFaceLibraryPage business_face_library_page = new BusinessFaceLibraryPage();
+            business_face_library_page.load_item();
             next_page = business_face_library_page;
             next_page_checked = true;
 
