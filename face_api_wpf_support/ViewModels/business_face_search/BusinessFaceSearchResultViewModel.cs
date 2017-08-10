@@ -1,4 +1,5 @@
 ﻿using face_api_commons.Common;
+using face_api_commons.Model;
 using face_api_wpf_support.Views.business_face_search;
 using Microsoft.ProjectOxford.Face.Contract;
 using System;
@@ -74,8 +75,8 @@ namespace face_api_wpf_support.ViewModels.business_face_search
 
         }
 
-        private List<string> _similar_face_list ;
-        public List<string> Similar_face_list
+        private List<FaceDocItem> _similar_face_list ;
+        public List<FaceDocItem> Similar_face_list
         {
             get
             {
@@ -85,7 +86,7 @@ namespace face_api_wpf_support.ViewModels.business_face_search
                 }
                 else
                 {
-                    return new List<string>();
+                    return new List<FaceDocItem>();
                 }
             }
 
@@ -137,17 +138,39 @@ namespace face_api_wpf_support.ViewModels.business_face_search
 
                 var ordered_face_list = face_dict.OrderBy(x => x.Value);
                 
-                foreach(var similar_face in ordered_face_list)
-                {
-                    temp_similar_list.Add(similar_face.Key);
-                }
+                List<FaceDocItem> result = new List<FaceDocItem>();
 
-                Similar_face_list = temp_similar_list;
+                Task<List<FaceDocItem>> get_repository_task = Task<List<FaceDocItem>>.Factory.StartNew(
+                    () =>
+                    {
 
+                        using (var context = new DemoContext())
+                        {
+                            var face_doc_list = from face_docs in context.FaceDocs
+                                                where face_dict.Keys.Contains(face_docs.FaceDocId)
+                                                select face_docs;
+
+                            foreach (var face_doc in face_doc_list)
+                            {
+                                var temp = new FaceDocItem(face_doc.FaceDocId, face_doc.UserData);
+                                temp.similarity = face_dict[face_doc.FaceDocId];
+
+                                result.Add(temp);
+                            }
+                        }
+
+                        return result;
+                    });
+
+                get_repository_task.Wait();
+
+                var temp_face_doc_list = get_repository_task.Result;
+
+                Similar_face_list = temp_face_doc_list.OrderByDescending(o => o.similarity).ToList();
             }
             else
             {
-                Similar_face_list = new List<string>();
+                Similar_face_list = new List<FaceDocItem>();
             }
                
             

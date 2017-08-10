@@ -7,6 +7,10 @@ namespace face_api_wpf_support.ViewModels
 {
     public class FaceDocItem
     {
+        public String face_doc_id { get; set; }
+        public BitmapImage face_doc_photo { get; set; }
+        public double similarity { get; set; }
+
         public FaceDocItem(string face_doc_id, string face_doc_uri)
         {
             this.face_doc_id = face_doc_id.ToString();
@@ -32,9 +36,6 @@ namespace face_api_wpf_support.ViewModels
             this.face_doc_photo = image;
 
         }
-
-        public String face_doc_id { get; set; }
-        public BitmapImage face_doc_photo { get; set; }
 
         public void CreatePhoto(byte[] photoSource)
         {
