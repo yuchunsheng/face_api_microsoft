@@ -1,4 +1,5 @@
 ﻿using face_api_wpf_support.ViewModels.business_face_search;
+using Microsoft.ProjectOxford.Face.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +30,9 @@ namespace face_api_wpf_support.Views.business_face_search
             DataContext = search_result_view_model;
         }
 
-        public void load_item()
+        public void load_item(SimilarPersistedFace[] face_list)
         {
-            //business_face_search_view_model.load_item();
+            search_result_view_model.load_item(face_list);
         }
 
         private void next_page_checked(object sender, RoutedEventArgs e)

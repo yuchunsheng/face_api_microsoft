@@ -58,22 +58,22 @@
                         ScrollViewer.VerticalScrollBarVisibility="Visible"  HorizontalAlignment="Left" HorizontalContentAlignment="Left">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Existing Repository" Width="320" DisplayMemberBinding="{Binding face_doc_id}" />
-                            <GridViewColumn  HeaderContainerStyle="{StaticResource ListViewStyle}" Header="" Width="320">
+                            <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Existing Repository" Width="320" DisplayMemberBinding="{Binding}" />
+                            <!--<GridViewColumn  HeaderContainerStyle="{StaticResource ListViewStyle}" Header="" Width="320">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Image Source="{Binding face_doc_photo}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Stretch="UniformToFill" ></Image>
-                                        <!--<Button Content="Delete" Command="{Binding DataContext.delete_repository_command,ElementName=repository_page}" CommandParameter="{Binding repository_id}"></Button>-->
+                                        --><!--<Button Content="Delete" Command="{Binding DataContext.delete_repository_command,ElementName=repository_page}" CommandParameter="{Binding repository_id}"></Button>--><!--
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn>
+                            </GridViewColumn>-->
+                            <!--<GridViewColumn>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Content="Remove" Margin="0" VerticalAlignment="Center" Command="{Binding DataContext.delete_face_command, ElementName=business_face_library_page}" CommandParameter="{Binding face_doc_id}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                            </GridViewColumn>-->
 
                         </GridView>
 

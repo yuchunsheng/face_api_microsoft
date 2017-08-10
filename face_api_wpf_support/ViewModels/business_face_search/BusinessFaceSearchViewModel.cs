@@ -147,16 +147,17 @@ namespace face_api_wpf_support.ViewModels.business_face_search
 
         private async void search_face(object obj)
         {
-            string imageFilePath = Photo_path.ToString();
+            //string imageFilePath = Photo_path.ToString();
 
-            FaceRectangle face_area;
+            Guid faceId;
+            string faceListId = "d7896b8a-92ba-4808-b335-c6634c309a74";
+            int maxNumOfCandidatesReturned = 20;
 
-            using (var fileStream = File.OpenRead(imageFilePath))
+            using (var fileStream = File.OpenRead(Photo_path.ToString()))
             {
                 using (var faceServiceClient = new FaceServiceClient())
                 {
-                    Microsoft.ProjectOxford.Face.Contract.Face[] faces = await faceServiceClient.DetectAsync(
-                        fileStream, false, true, null);
+                    Microsoft.ProjectOxford.Face.Contract.Face[] faces = await faceServiceClient.DetectAsync(fileStream, true, false, null);
 
                     //new FaceAttributeType[] { FaceAttributeType.Gender, FaceAttributeType.Age, FaceAttributeType.Smile, FaceAttributeType.Glasses });
 
@@ -167,82 +168,31 @@ namespace face_api_wpf_support.ViewModels.business_face_search
                     }
                     else
                     {
-                        face_area = faces[0].FaceRectangle;
+                        faceId = faces[0].FaceId;
                     }
 
                 }
 
             }
-
-            Guid persistedFaceId;
-            string faceListId = "d7896b8a-92ba-4808-b335-c6634c309a74";
+            SimilarPersistedFace[] result = null;
 
             //save the face to the face list
             using (var faceServiceClient = new FaceServiceClient())
             {
                 //string faceListId = "d7896b8a-92ba-4808-b335-c6634c309a74";
-                Stream imageStream = File.OpenRead(imageFilePath);
-                AddPersistedFaceResult result = await faceServiceClient.AddFaceToFaceListAsync(faceListId, imageStream, imageFilePath, face_area);
-                persistedFaceId = result.PersistedFaceId;
-            }
-
-            string photolocation = "";  //file name
-
-            if (persistedFaceId != Guid.Empty)
-            {
-                photolocation = "e:\\temp\\temp\\" + persistedFaceId.ToString() + ".jpg";  //file name
-                using (FileStream filestream = new FileStream(photolocation, FileMode.Create))
+                try
                 {
-                    BitmapImage image;
-                    image = new BitmapImage(new Uri(imageFilePath));
-                    JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-                    encoder.Frames.Add(BitmapFrame.Create(image));
-                    encoder.Save(filestream);
+                    result = await faceServiceClient.FindSimilarAsync(faceId, faceListId , FindSimilarMatchMode.matchFace, maxNumOfCandidatesReturned);
                 }
-            }
-
-            //save the face in the database
-            Task add_face_task = Task.Factory.StartNew(
-            () =>
-            {
-                using (var context = new DemoContext())
+                catch (FaceAPIException e)
                 {
-
-
-                    using (var dbContextTransaction = context.Database.BeginTransaction())
-                    {
-                        try
-                        {
-                            // Perform data access using the context 
-                            FaceDocs face_doc = new FaceDocs();
-                            face_doc.FaceDocId = persistedFaceId.ToString();
-                            face_doc.UserData = "e:\\temp\\temp\\";
-                            context.FaceDocs.Add(face_doc);
-
-                            FaceDocRepository face_doc_repository = new FaceDocRepository();
-                            face_doc_repository.FaceDocId = persistedFaceId.ToString();
-                            face_doc_repository.FaceRepositoryId = faceListId;
-
-                            context.FaceDocRepository.Add(face_doc_repository);
-
-                            context.SaveChanges();
-                            dbContextTransaction.Commit();
-
-                        }
-                        catch (Exception e)
-                        {
-                            dbContextTransaction.Rollback();
-                        }
-
-                    }
+                    Console.WriteLine(e.ErrorMessage);
                 }
-
-            });
-
-            add_face_task.Wait();
-
+                
+            }
+            
             BusinessFaceSearchResultPage face_result_page = new BusinessFaceSearchResultPage();
-            //face_result_page.load_item();
+            face_result_page.load_item(result);
             next_page = face_result_page;
             next_page_checked = true;
 

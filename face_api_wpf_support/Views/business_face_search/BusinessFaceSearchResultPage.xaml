@@ -53,11 +53,11 @@
                     <Label Content="Face Doc List"  />
                 </StackPanel>
 
-                <ListView x:Name="face_doc_list" Grid.Row="1" Grid.Column="0"  ItemsSource="{Binding face_doc_list}" ScrollViewer.CanContentScroll="True" 
+                <ListView x:Name="similar_face_list" Grid.Row="1" Grid.Column="0"  ItemsSource="{Binding Similar_face_list}" ScrollViewer.CanContentScroll="True" 
                         ScrollViewer.VerticalScrollBarVisibility="Visible"  HorizontalAlignment="Left" HorizontalContentAlignment="Left">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Existing Repository" Width="320" DisplayMemberBinding="{Binding face_doc_id}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource ListViewStyle}" Header="Existing Repository" Width="320" DisplayMemberBinding="{Binding }" />
                             <GridViewColumn  HeaderContainerStyle="{StaticResource ListViewStyle}" Header="" Width="320">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>

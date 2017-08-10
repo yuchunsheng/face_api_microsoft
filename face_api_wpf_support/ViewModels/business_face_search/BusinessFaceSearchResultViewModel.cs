@@ -1,5 +1,6 @@
 ﻿using face_api_commons.Common;
 using face_api_wpf_support.Views.business_face_search;
+using Microsoft.ProjectOxford.Face.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,6 +74,28 @@ namespace face_api_wpf_support.ViewModels.business_face_search
 
         }
 
+        private List<string> _similar_face_list ;
+        public List<string> Similar_face_list
+        {
+            get
+            {
+                if (_similar_face_list != null)
+                {
+                    return _similar_face_list;
+                }
+                else
+                {
+                    return new List<string>();
+                }
+            }
+
+            set
+            {
+                _similar_face_list = value;
+                RaisePropertyChangedEvent("Similar_face_list");
+            }
+        }
+
         RelayCommand _go_back_command;
         public RelayCommand go_back_command
         {
@@ -89,12 +112,45 @@ namespace face_api_wpf_support.ViewModels.business_face_search
 
         }
 
+        
+
         private void go_home(object obj)
         {
             BusinessFaceSearchPage face_search_page = new BusinessFaceSearchPage();
             next_page = face_search_page;
             next_page_checked = true;
 
+        }
+
+        public void load_item(SimilarPersistedFace[] face_list)
+        {
+            if (face_list != null)
+            {
+                var face_dict = new Dictionary<string, double>();
+                var temp_similar_list = new List<string>();
+
+                foreach (var similar_face in face_list)
+                {
+                    Console.WriteLine(similar_face.PersistedFaceId.ToString() + ":::" + similar_face.Confidence);
+                    face_dict.Add(similar_face.PersistedFaceId.ToString(), similar_face.Confidence);
+                }
+
+                var ordered_face_list = face_dict.OrderBy(x => x.Value);
+                
+                foreach(var similar_face in ordered_face_list)
+                {
+                    temp_similar_list.Add(similar_face.Key);
+                }
+
+                Similar_face_list = temp_similar_list;
+
+            }
+            else
+            {
+                Similar_face_list = new List<string>();
+            }
+               
+            
         }
     }
 }
